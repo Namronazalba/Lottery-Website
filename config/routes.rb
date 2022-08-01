@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  root :to => "homes#index"
+
+
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  constraints(ClientDomainConstraint.new) do
+    get "home" => "homes#index"
+
+  end
+
+  constraints(AdminDomainConstraint.new) do
+    get "admin" => "admin#index"
+    get "admin" => "admin#login"
+  end
+
 end

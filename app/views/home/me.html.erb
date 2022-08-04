@@ -1,0 +1,35 @@
+<style>
+  .user-profile{
+      border: 1px solid;
+      padding: 10px;
+      margin: auto;
+      width: 60%;
+      margin-top: 100px;
+  }
+  .full-width{
+      width: 100%;
+      text-align: center;
+      padding: 5px;
+  }
+  .full-width button{
+      width: 49.7%;
+      padding: 5px;
+  }
+</style>
+
+<div  class="user-profile">
+  <div><p>Username : <%=current_user.username.capitalize %></p></div>
+  <br>
+  <div><p>Email : <%=current_user.email.capitalize %></p></div>
+  <br>
+  <div><p>Coins : <%=current_user.coins %></p></div>
+  <br>
+  <button class="full-width">Cash in now</button>
+  <br>
+  <br>
+  <div class="full-width">
+    <button><%= link_to "Me",edit_user_registration_path , class: "link-info" if user_signed_in?%></button>
+    <button>Address</button>
+  </div>
+</div>
+<%= render "home/sharednav/nav" %>

@@ -10,7 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_03_080320) do
+ActiveRecord::Schema.define(version: 2022_08_05_035230) do
+
+  create_table "barangays", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.integer "city_id"
+    t.integer "municipality_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_barangays_on_city_id"
+    t.index ["municipality_id"], name: "index_barangays_on_municipality_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.integer "district_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["district_id"], name: "index_cities_on_district_id"
+  end
+
+  create_table "districts", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.integer "region_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["region_id"], name: "index_districts_on_region_id"
+  end
+
+  create_table "municipalities", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.integer "province_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["province_id"], name: "index_municipalities_on_province_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.integer "region_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["region_id"], name: "index_provinces_on_region_id"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "region_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

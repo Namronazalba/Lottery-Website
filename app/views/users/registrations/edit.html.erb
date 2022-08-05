@@ -15,6 +15,11 @@
               </div>
 
               <div class="form-outline mb-4">
+                <%= f.label :phone %><br />
+                <%= f.phone_field :phone,class: "form-control", autofocus: true, autocomplete: "username" %>
+              </div>
+
+              <div class="form-outline mb-4">
                 <%= f.label :username %><br />
                 <%= f.email_field :username,class: "form-control", autofocus: true, autocomplete: "username" %>
               </div>

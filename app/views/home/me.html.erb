@@ -18,6 +18,7 @@
 </style>
 
 <div  class="user-profile">
+  <div><%= image_tag "http://localhost:3000/#{current_user.avatar.url}" if current_user.avatar? %></div>
   <div><p>Username : <%=current_user.username.capitalize %></p></div>
   <br>
   <div><p>Email : <%=current_user.email.capitalize %></p></div>

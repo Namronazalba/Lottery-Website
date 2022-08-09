@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
     root :to => 'home#index'
+
     get 'profile', to: 'home#me'
+
+    resources :address
   end
 
   constraints(AdminDomainConstraint.new) do

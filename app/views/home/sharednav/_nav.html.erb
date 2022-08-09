@@ -1,6 +1,24 @@
+<style>
+  .style1{
+
+      width: 95%;
+  }
+  .style1 .cont{
+      width: 15%;
+      text-align: center;
+  }
+</style>
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"></a>
+    <div class="d-flex justify-content-center style1">
+      <a class="navbar-brand cont" href="">Brand image</a>
+      <a class="navbar-brand cont" href=""></a>
+      <a class="navbar-brand cont" href="">Coins</a>
+      <a class="navbar-brand cont" href="">Claim</a>
+      <a class="navbar-brand cont" href="#">Language</a>
+
+    </div>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,28 +29,36 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Menu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= image_tag "http://localhost:3000/#{current_user&.avatar.url}" if current_user.avatar? %>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link" href="#">Username : <%= current_user.username.capitalize %></p>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link" href="#">Email : <%= current_user.email.capitalize %></p>
+            </li>
+            <li class="nav-item">
+              <p class="nav-link" href="#">Coins : <%= current_user.coins %></p>
+            </li>
+            <li class="nav-item">
+              <button class="full-width">Cash in now</button>
+            </li>
+            <li class="nav-item">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= link_to "Home", root_path, class: "link-info" if user_signed_in? %></a>
+            </li>
+              <a class="nav-link" href="#"><%= link_to "Contact Us" %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= link_to "My Profile", edit_user_registration_path, class: "link-info" if user_signed_in? %></a>
+            </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></a>
+            </li>
+          <% end %>
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -70,7 +96,7 @@
 
   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
-      <p><%= link_to "Me",profile_path , class: "link-info" if user_signed_in?%></p>
+      <p><%= link_to "Me", profile_path, class: "link-info"%></p>
     </li>
   </ul>
 </nav>

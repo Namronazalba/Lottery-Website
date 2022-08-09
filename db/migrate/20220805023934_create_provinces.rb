@@ -4,6 +4,7 @@ class CreateProvinces < ActiveRecord::Migration[6.1]
       t.string :code
       t.string :name
       t.belongs_to :region
+      # t.belongs_to :address
       t.timestamps
     end
   end

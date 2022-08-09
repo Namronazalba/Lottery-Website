@@ -4,7 +4,6 @@ class CreateBarangays < ActiveRecord::Migration[6.1]
       t.string :code
       t.string :name
       t.belongs_to :city
-      t.belongs_to :municipality
       t.timestamps
     end
   end

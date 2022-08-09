@@ -30,7 +30,7 @@
   <br>
   <div class="full-width">
     <button><%= link_to "Me",edit_user_registration_path , class: "link-info" if user_signed_in?%></button>
-    <button>Address</button>
+    <button><%= link_to "Address", address_path, class: "link-info" if user_signed_in?%></button>
   </div>
 </div>
 <%= render "home/sharednav/nav" %>

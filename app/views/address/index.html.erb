@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Address</h1>
+  <% @addresses.each do |address| %>
+    <div class="container" style="margin-bottom: 120px;">
+      <br><br>
+      <div class="row">
+        <div>
+          <p><b>Name : </b><%= address.name %></p>
+        </div>
+        <div>
+          <p><b>Phone Number : </b><%= address.phone_number %></p>
+        </div>
+      </div>
+      <div>
+        <p>Address : <%= address.street_address %>, <%= address.barangay.name %>, <%= address.city.name %>
+          , <%= address.province.name %>, <%= address.region.name %></p>
+      </div>
+      <%= form_for address, method: :delete do |f| %>
+        <%= link_to "show ", address_path(address), class: "btn btn-info" %>
+        <%= link_to "edit ", edit_address_path(address), class: "btn btn-info" if address.user == current_user %>
+        <%= f.submit "delete", class: "btn btn-info", url: address_path(address) if address.user == current_user %>
+      <% end %>
+  <% end %>
+  </div> <br>
+  <%= link_to 'Add', new_address_path, class: 'btn btn-success mb-4' %>
+</div>
+<%= render "layouts/sharednav/nav" %>

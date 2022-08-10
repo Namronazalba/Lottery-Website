@@ -1,0 +1,60 @@
+<% if address.errors.any? %>
+  <% address.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <div>
+    <%= f.select(:genre, Address.genres.keys.map { |key| [key.humanize, key] }) %>
+  </div>
+
+
+  <div>
+    <%= f.label :street_address %>
+    <%= f.text_field :street_address, class: 'form-control' %>
+  </div>
+
+
+  <div>
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= f.label :remark %>
+    <%= f.text_field :remark, class: 'form-control' %>
+  </div>
+
+  <div>
+    <% unless @address.is_default %>
+      <%= f.check_box :is_default %>
+      <%= f.label :is_default, 'Default' %>
+    <% else %>
+      <%= f.check_box :is_default, onclick:"return false;", checked:true%>
+      <%= f.label :is_default, 'Default' %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.collection_select :region_id, Region.order(:id), :id, :name, { include_blank: "Please Select Region" }, { class: "form-control form-control-lg mb-3" } %>
+  </div>
+
+  <div>
+    <%= f.collection_select :province_id, Province.order(:id), :id, :name, { include_blank: "Please Select Province" }, { class: "form-control form-control-lg mb-3" } %>
+  </div>
+
+  <div>
+    <%= f.collection_select :city_id, City.order(:id), :id, :name, { include_blank: "Please Select City" }, { class: "form-control form-control-lg mb-3" } %>
+  </div>
+
+  <div>
+    <%= f.collection_select :barangay_id, Barangay.where('id<=?', 10).order(:id), :id, :name, { include_blank: "Please Select barangay" }, { class: "form-control form-control-lg mb-3" } %>
+  </div>
+
+</div>

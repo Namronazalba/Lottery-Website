@@ -47,16 +47,16 @@
             </li>
             <li class="nav-item">
             <li class="nav-item">
-              <a class="nav-link" href="#"><%= link_to "Home", root_path, class: "link-info" if user_signed_in? %></a>
+              <a class="nav-link"><%= link_to "Home", root_path, class: "link-info" if user_signed_in? %></a>
             </li>
-              <a class="nav-link" href="#"><%= link_to "Contact Us" %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><%= link_to "My Profile", edit_user_registration_path, class: "link-info" if user_signed_in? %></a>
-            </li>
+              <a class="nav-link"><%= link_to "Contact Us" %></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></a>
+              <a class="nav-link"><%= link_to "My Profile", edit_user_registration_path, class: "link-info" if user_signed_in? %></a>
+            </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></a>
             </li>
           <% end %>
         </ul>

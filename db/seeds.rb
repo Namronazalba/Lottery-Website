@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+services= PhLocationService.new
+services.get_regions
+services.get_provinces
+services.get_cities
+services.get_barangays
+
+
+

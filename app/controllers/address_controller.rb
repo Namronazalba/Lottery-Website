@@ -48,8 +48,4 @@ class AddressController < ApplicationController
   def set_address
     @address = Address.find(params[:id])
   end
-
-  def limit_address
-
-  end
 end

@@ -39,15 +39,6 @@ class AddressController < ApplicationController
     end
   end
 
-  def check
-    @address = current_user.addresses.find_by_id(params[:address_id])
-    if @address.may_check?
-      @address.check!
-      flash[:notice] = "this order state change to inspecting"
-      redirect_to address_index_path
-    end
-  end
-
   private
 
   def address_params
@@ -56,5 +47,9 @@ class AddressController < ApplicationController
 
   def set_address
     @address = Address.find(params[:id])
+  end
+
+  def limit_address
+
   end
 end

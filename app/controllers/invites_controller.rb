@@ -1,12 +1,15 @@
 class InvitesController < ApplicationController
+  before_action :authenticate_user!
     require "rqrcode"
     before_action :set_invite_url
     before_action :g_qrcode
 
     def index; end
 
+    private
+
     def set_invite_url
-      @generated_url="#{request.base_url}/users/sign_up?promoter=#{current_user.username}"
+      @generated_url="#{request.base_url}/users/sign_up?promoter=#{current_user.email}"
     end
 
     def g_qrcode
@@ -18,6 +21,6 @@ class InvitesController < ApplicationController
         standalone: true,
         use_path: true
       )
-      IO.binwrite("public/qrcode/#{current_user.username}.svg", svg.to_s)
+      IO.binwrite("public/qrcode/#{current_user.email}.svg", svg.to_s)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_09_040015) do
+ActiveRecord::Schema.define(version: 2022_08_11_025920) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_040015) do
     t.integer "children_members"
     t.string "username"
     t.string "avatar"
+    t.integer "parent_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  belongs_to :parent, class_name: "User", optional: true, counter_cache: :children_members
+  has_many :children, class_name: "User", foreign_key: 'parent_id'
+
   validates :phone, phone: {allow_blank: true}
   has_many :addresses
 
@@ -16,5 +19,4 @@ class User < ApplicationRecord
   def admin?
     role == 'admin'
   end
-
 end

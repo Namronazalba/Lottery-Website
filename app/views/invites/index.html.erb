@@ -1,0 +1,7 @@
+<div style="margin-top: 90px;text-align: center;">
+  <%= image_tag "/qrcode/#{current_user.username}.svg", style: "padding: 10px;"%> <br>
+</div>
+
+
+<%= link_to @generated_url, @generated_url, {class: "btn btn-primary btn-lg btn-block", style:"width: 95%;"} if user_signed_in?%>
+<%= render "layouts/sharednav/nav" %>

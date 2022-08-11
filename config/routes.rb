@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'profile', to: 'home#me'
 
     resources :address
+    resources :invites
   end
 
   constraints(AdminDomainConstraint.new) do

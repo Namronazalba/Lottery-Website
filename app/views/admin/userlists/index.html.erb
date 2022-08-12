@@ -1,0 +1,18 @@
+<%=render "layouts/navbar_admin/navadmin"%>
+<div class="main" >
+  <h1 style="color: blue; margin-top: 15px;">User list</h1>
+
+    <% @users.each do |user| %>
+    <div style="border: 1px solid; padding: 15px;">
+      <div>Parent: <%= user.parent&.email%></div><br>
+      <div>Email: <%= user.email%></div><br>
+      <div>Total deposit: <%= user.total_deposit%></div><br>
+      <div>Members total deposit:</div><br>
+      <div>Coins: <%= user.coins %></div><br>
+      <div>Total used coins:</div><br>
+      <div>Children members: <%= user.children_members%></div><br>
+      <div>Phone number: <%= user.phone%></div><br>
+    </div>
+    <br>
+    <% end %>
+</div>

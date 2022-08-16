@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_025920) do
+ActiveRecord::Schema.define(version: 2022_08_16_054429) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2022_08_11_025920) do
     t.index ["city_id"], name: "index_barangays_on_city_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -50,6 +57,33 @@ ActiveRecord::Schema.define(version: 2022_08_11_025920) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["province_id"], name: "index_cities_on_province_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "image"
+    t.string "name"
+    t.integer "quantity"
+    t.integer "minimum_bet"
+    t.integer "batch_count", default: 0
+    t.datetime "online_at"
+    t.datetime "offline_at"
+    t.datetime "start_at"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "state"
+    t.datetime "deleted_at"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
+  create_table "municipalities", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.integer "province_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["province_id"], name: "index_municipalities_on_province_id"
   end
 
   create_table "provinces", force: :cascade do |t|

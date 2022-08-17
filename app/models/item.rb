@@ -1,8 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :category
-  validates_presence_of :name
-  validates_presence_of :quantity
-  validates_presence_of :minimum_bet
+  validates :name, :quantity, :minimum_bet, presence: true
   scope :filter_by_category, -> (category) { includes(:category).where(category: {name: category}) }
 
   mount_uploader :image, ImageUploader
@@ -19,7 +17,7 @@ class Item < ApplicationRecord
     state :starting, :paused, :ended, :cancelled
 
     event :start, after: :change_status do
-      transitions from: [:pending, :ended, :cancelled, :paused], to: :starting, guards: [:set_process, :less_than_one?, :offline_time?, :is_active?]
+      transitions from: [:pending, :ended, :cancelled, :paused], to: :starting, guards: [ :less_than_one?, :offline_time?, :is_active?]
       transitions from: :paused, to: :starting
     end
 

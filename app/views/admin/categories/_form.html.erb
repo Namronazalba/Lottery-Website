@@ -1,0 +1,11 @@
+<% if @category.errors.any? %>
+  <% @category.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+<div style="">
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+</div>

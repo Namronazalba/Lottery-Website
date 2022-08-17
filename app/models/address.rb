@@ -1,8 +1,5 @@
 class Address < ApplicationRecord
-  validates_presence_of :name
-  validates_presence_of :street_address
-  validates_presence_of :phone_number
-  validates_presence_of :remark
+  validates :name, :street_address, :phone_number,:remark, presence: true
   validates_presence_of :is_default, allow_blank: true
 
   belongs_to :region
@@ -42,10 +39,10 @@ class Address < ApplicationRecord
       errors.add(:base, "You reached the maximum number of address")
     end
   end
-  def limit_address
-    return unless self.user
-    if self.user.addresses.reload.count >= 5
-      errors.add(:base, "You reach the limit")
-    end
-  end
+  # def limit_address
+  #   return unless self.user
+  #   if self.user.addresses.reload.count >= 5
+  #     errors.add(:base, "You reach the limit")
+  #   end
+  # end
 end

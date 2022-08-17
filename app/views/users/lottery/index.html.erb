@@ -1,0 +1,28 @@
+<%= render "layouts/imgslider/imgslider" %>
+<div style="margin-bottom: 100px; text-align: center;">
+  <div>
+    <div style="display: inline-flex;">
+      <%= link_to "All", users_lotteries_path %>
+      <% @categories.each do |category| %>
+        <%= link_to category.name, users_lotteries_path(category: category.name), style:"margin-left: 10px;" %>
+      <% end %>
+    </div>
+  </div>
+  <br>
+
+  <div>
+    <div style="display: inline-block;text-align: center;">
+      <div>
+        <% @items.each do |item| %>
+          <div style="display: inline-block;width: 40%;margin-bottom: 10px;">
+            <%= image_tag "http://localhost:3000/#{item.image.url}",style:"width: 100%;" if item.image?  %>  <br>
+            <%= item.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%= render "layouts/sharednav/nav" %>

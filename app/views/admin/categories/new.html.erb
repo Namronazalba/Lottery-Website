@@ -1,0 +1,8 @@
+<%= render "layouts/navbar_admin/navadmin"%>
+<div class="main">
+  <h1>Add new category</h1>
+  <%= form_for @category, url: admin_categories_path, method: :post do |f| %>
+    <%= render partial: 'form', locals: {f: f, category: @category} %> <br>
+    <%= f.submit "Save",class: 'btn btn-primary ' %>
+  <% end %>
+</div>

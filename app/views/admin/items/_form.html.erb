@@ -1,0 +1,45 @@
+<% if @item.errors.any? %>
+  <% @item.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+<div style="">
+  <td><%= image_tag "http://localhost:3000/#{item. image.url}",style: 'height: 150px;' if item.image? %></td>
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :minimum_bet %>
+    <%= f.text_field :minimum_bet, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.order(:id), :id, :name, { include_blank: "Please Select Category" }, { class: "form-control form-control-lg mb-3" } %>
+  </div>
+  <div>
+    <%= f.label :online_at %>
+    <%= f.datetime_field :online_at, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :offline_at %>
+    <%= f.datetime_field :offline_at, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :start_at %>
+    <%= f.datetime_field :start_at, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :status %>  <br>
+    <%= f.radio_button :status, 1 %> Active<br>
+    <%= f.radio_button :status, 0 %> Inactive <br>
+  </div>
+</div>

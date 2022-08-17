@@ -1,0 +1,52 @@
+<%= render "layouts/navbar_admin/navadmin" %>
+<div class="main">
+  <h1 style="color: blue; margin-top: 15px;">Item list</h1>
+  <%= link_to 'Add', new_admin_item_path, class: 'btn btn-success mb-4', style:"width: 70px;"  %>
+  <%= link_to 'Categories', admin_categories_path, class: 'btn btn-success mb-4', style:"width: 100px;"  %>
+  <table class="table table-striped border border-success">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Minimum bet</th>
+      <th scope="col">State</th>
+      <th scope="col">Batch count</th>
+      <th scope="col">Online at</th>
+      <th scope="col">Offline at</th>
+      <th scope="col">Start at</th>
+      <th scope="col">Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <% @items.each do |item| %>
+      <tbody>
+      <tr>
+        <th  scope="row"><%= item.id %></th>
+        <td><%= image_tag "http://localhost:3000/#{item. image.url}",style: 'height: 150px;' if item.image? %></td>
+        <td><%= item.name %></td>
+        <td><%= item.category&.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.minimum_bet %></td>
+        <td><%= item.state %></td>
+        <td><%= item.batch_count %></td>
+        <td><%= item.online_at %></td>
+        <td><%= item.offline_at %></td>
+        <td><%= item.start_at %></td>
+        <td><%= item.status == 1 ? 'Active' : 'Inactive' %></td>
+        <td>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <%= link_to " edit ", edit_admin_item_path(item), class: "btn btn-info ", style:"width: 70px;" %>
+            <%= link_to "delete", admin_item_path(item), method: :delete, class: "btn btn-danger", style:"width: 70px;" %>
+          </div>
+
+
+        </td>
+      </tr>
+      </tbody>
+    <% end %>
+  </table>
+  <br>
+</div>

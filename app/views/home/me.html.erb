@@ -11,10 +11,7 @@
       text-align: center;
       padding: 5px;
   }
-  .full-width button{
-      width: 49.7%;
-      padding: 5px;
-  }
+  .full-width .button
 </style>
 
 <div  class="user-profile">
@@ -29,8 +26,8 @@
   <br>
   <br>
   <div class="full-width">
-    <button><%= link_to "Me",edit_user_registration_path , class: "link-info" if user_signed_in?%></button>
-    <button><%= link_to "Address", address_index_path, class: "link-info" if user_signed_in?%></button>
+    <%= link_to "Me",edit_user_registration_path, {class: "btn btn-primary btn-lg btn-block", style:"width: 49%;"} if user_signed_in?%>
+    <%= link_to "Address", address_index_path, {class: "btn btn-primary btn-lg btn-block", style:"width: 49%;"} if user_signed_in?%>
   </div>
 </div>
 <%= render "layouts/sharednav/nav" %>

@@ -42,12 +42,13 @@
             <li class="nav-item">
               <p class="nav-link" href="#">Coins : <%= current_user.coins %></p>
             </li>
+          <% end %>
             <li class="nav-item">
               <button class="full-width">Cash in now</button>
             </li>
             <li class="nav-item">
             <li class="nav-item">
-              <a class="nav-link"><%= link_to "Home", root_path, class: "link-info" if user_signed_in? %></a>
+              <a class="nav-link"><%= link_to "Home", root_path, class: "link-info"%></a>
             </li>
               <a class="nav-link"><%= link_to "Contact Us" %></a>
             </li>
@@ -56,9 +57,9 @@
             </li>
             </li>
             <li class="nav-item">
-              <a class="nav-link"><%= link_to "Logout", destroy_user_session_path, :method => :delete %></a>
+              <a class="nav-link"><%= link_to "Logout", destroy_user_session_path, :method => :delete if user_signed_in? %></a>
             </li>
-          <% end %>
+
         </ul>
 
       </div>
@@ -75,14 +76,14 @@
 
   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
-      <%= link_to "Invite", invites_path, class: "link-info" if user_signed_in? %>
+      <%= link_to "Invite", invites_path, class: "link-info" %>
     </li>
   </ul>
 
   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
       <a href="" class="link-info">
-        <%= link_to "Lottery", users_lotteries_path, class: "link-info" if user_signed_in? %>
+        <%= link_to "Lottery", users_lotteries_path, class: "link-info"%>
       </a>
     </li>
   </ul>

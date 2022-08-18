@@ -38,8 +38,7 @@
     <%= f.datetime_field :start_at, class: 'form-control' %>
   </div>
   <div>
-    <%= f.label :status %>  <br>
-    <%= f.radio_button :status, 1 %> Active<br>
-    <%= f.radio_button :status, 0 %> Inactive <br>
+    <%= f.label :status %>
+    <%= f.select(:status, Item.statuses.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please Select Status' }, { class: 'form-control mt-3' }) %>
   </div>
 </div>

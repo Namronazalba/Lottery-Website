@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   validates :name, :quantity, :minimum_bet, presence: true
   scope :filter_by_category, -> (category) { includes(:category).where(category: {name: category}) }
 
+  enum status: [:active, :inactive]
+
   mount_uploader :image, ImageUploader
 
   default_scope { where(deleted_at: nil) }
@@ -16,8 +18,8 @@ class Item < ApplicationRecord
     state :pending, initial: true
     state :starting, :paused, :ended, :cancelled
 
-    event :start, after: :change_status do
-      transitions from: [:pending, :ended, :cancelled, :paused], to: :starting, guards: [ :less_than_one?, :offline_time?, :is_active?]
+    event :start do
+      transitions from: [:pending, :ended, :cancelled], to: :starting, after: :change_status, guards: [ :less_than_one?, :offline_time?, :active?]
       transitions from: :paused, to: :starting
     end
 
@@ -44,10 +46,6 @@ class Item < ApplicationRecord
 
   def offline_time?
     offline_at > Time.now
-  end
-
-  def is_active?
-    status == "Active"
   end
 
 

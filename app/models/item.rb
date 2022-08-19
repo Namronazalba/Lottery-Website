@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :category
-  validates :name, :quantity, :minimum_bet, presence: true
+  validates :image, :name, :quantity, :minimum_bet, :batch_count, :online_at, :offline_at, :start_at, :status, presence: true
   scope :filter_by_category, -> (category) { includes(:category).where(category: {name: category}) }
 
   enum status: [:active, :inactive]
@@ -32,7 +32,7 @@ class Item < ApplicationRecord
     end
 
     event :cancel do
-      transitions from [:starting, :paused], to: :cancelled
+      transitions from: [:starting, :paused], to: :cancelled
     end
   end
 
@@ -41,12 +41,10 @@ class Item < ApplicationRecord
   end
 
   def less_than_one?
-    quantity > 0
+    quantity >= 0
   end
 
   def offline_time?
     offline_at > Time.now
   end
-
-
 end

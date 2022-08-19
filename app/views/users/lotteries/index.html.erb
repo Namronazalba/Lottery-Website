@@ -2,9 +2,9 @@
 <div style="margin-bottom: 100px; text-align: center;">
   <div>
     <div style="display: inline-flex;">
-      <%= link_to "All", users_lotteries_path %>
+      <%= link_to "All", users_lotteries_path, class:"btn btn-primary rounded-pill" %>
       <% @categories.each do |category| %>
-        <%= link_to category.name, users_lotteries_path(category: category.name), style:"margin-left: 10px;" %>
+        <%= link_to category.name, users_lotteries_path(category: category.name), style: "margin-left: 10px;", class:"btn btn-primary rounded-pill" %>
       <% end %>
     </div>
   </div>
@@ -15,13 +15,12 @@
       <div>
         <% @items.each do |item| %>
           <div style="display: inline-block;width: 40%;margin-bottom: 10px;">
-            <%= image_tag "http://localhost:3000/#{item.image.url}",style:"width: 100%;" if item.image?  %>  <br>
-            <%= item.name %>
-          </div>
+                <%= link_to  (image_tag "http://localhost:3000/#{item.image.url}", style: "width: 100%;" if item.image?),users_lottery_path(item) %>  <br>
+                <%= item.name %>
+        </div>
         <% end %>
       </div>
     </div>
-
   </div>
 </div>
 

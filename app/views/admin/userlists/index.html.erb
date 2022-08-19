@@ -1,18 +1,35 @@
-<%=render "layouts/navbar_admin/navadmin"%>
-<div class="main" >
+<%= render "layouts/navbar_admin/navadmin" %>
+<div class="main">
   <h1 style="color: blue; margin-top: 15px;">User list</h1>
-
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Parent</th>
+      <th scope="col">Email</th>
+      <th scope="col">Total deposit</th>
+      <th scope="col">Members total deposit</th>
+      <th scope="col">Coins</th>
+      <th scope="col">Total used coins</th>
+      <th scope="col">Children members</th>
+      <th scope="col">Phone number</th>
+    </tr>
+    </thead>
     <% @users.each do |user| %>
-    <div style="border: 1px solid; padding: 15px;">
-      <div>Parent: <%= user.parent&.email%></div><br>
-      <div>Email: <%= user.email%></div><br>
-      <div>Total deposit: <%= user.total_deposit%></div><br>
-      <div>Members total deposit:</div><br>
-      <div>Coins: <%= user.coins %></div><br>
-      <div>Total used coins:</div><br>
-      <div>Children members: <%= user.children_members%></div><br>
-      <div>Phone number: <%= user.phone%></div><br>
-    </div>
-    <br>
+      <tbody>
+      <tr>
+        <td scope="col"><%= user.id %></td>
+        <td scope="col"><%= user.parent&.email %></td>
+        <td scope="col"><%= user.email %></td>
+        <td scope="col"><%= user.total_deposit %></td>
+        <td scope="col"><%= user.phone %></td>
+        <td scope="col"><%= user.coins %></td>
+        <td scope="col"></td>
+        <td scope="col"><%= user.children_members %></td>
+        <td scope="col"><%= user.phone %></td>
+      </tr>
+      </tbody>
     <% end %>
+  </table>
+
 </div>

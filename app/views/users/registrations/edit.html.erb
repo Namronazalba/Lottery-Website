@@ -5,7 +5,7 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem;margin-bottom: 100px;">
 
           <div class="card-body p-5 text-center">
-            <div style="font-size: 35px; color: green;"><%= alert %></div>
+            <%= render "layouts/errormsg/errormsg" %>
             <h2>Edit <%= resource_name.to_s.humanize %></h2>
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
               <%= render  "devise/shared/error_messages", resource: resource %>

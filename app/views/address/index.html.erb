@@ -1,27 +1,38 @@
 <div class="container">
-  <h1>Address</h1>
-  <% @addresses.each do |address| %>
-    <div class="container" style="margin-bottom: 120px;">
-      <br><br>
-      <div class="row">
-        <div>
-          <p><b>Name : </b><%= address.name %></p>
-        </div>
-        <div>
-          <p><b>Phone Number : </b><%= address.phone_number %></p>
-        </div>
-      </div>
-      <div>
-        <p>Address : <%= address.street_address %>, <%= address.barangay.name %>, <%= address.city.name %>
-          , <%= address.province.name %>, <%= address.region.name %></p>
-      </div>
-      <%= form_for address, method: :delete do |f| %>
-        <%= link_to "show ", address_path(address), class: "btn btn-info" %>
-        <%= link_to "edit ", edit_address_path(address), class: "btn btn-info" if address.user == current_user %>
-        <%= f.submit "delete", class: "btn btn-info", url: address_path(address) if address.user == current_user %>
-      <% end %>
-  <% end %>
-  </div> <br>
-  <%= link_to 'Add', new_address_path, class: 'btn btn-success mb-4' %>
+  <h1>Address</h1> <br>
+  <table class="table">
+    <%= render "layouts/errormsg/errormsg" %>
+
+
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+    <% @addresses.each do |address| %>
+      <tbody>
+      <tr>
+        <th scope="row"><%= address.id %></th>
+        <td><%= address.name %></td>
+        <td><%= address.phone_number %></td>
+        <td><%= address.street_address %>, <%= address.barangay.name %>, <%= address.city.name %>
+          , <%= address.province.name %>, <%= address.region.name %></td>
+        <td>
+          <%= form_for address, method: :delete do |f| %>
+            <%= link_to "show ", address_path(address), class: "btn btn-info" %>
+            <%= link_to "edit ", edit_address_path(address), class: "btn btn-info" if address.user == current_user %>
+            <%= f.submit "delete", class: "btn btn-info", url: address_path(address) if address.user == current_user %>
+          <% end %>
+        </td>
+      </tr>
+      </tbody>
+    <% end %>
+    <%= link_to 'Add', new_address_path, class: 'btn btn-success mb-4' %>
+  </table>
 </div>
+
 <%= render "layouts/sharednav/nav" %>

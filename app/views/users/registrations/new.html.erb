@@ -18,8 +18,8 @@
                 <div class="form-outline mb-4">
                   <% if cookies[:promoter] %>
                     <div class="field">
-                      <%= f.label :promoter,class: "form-label", readonly: true%><br />
-                      <%= f.email_field :parent,class: "form-control", autofocus: true, autocomplete: "email", value: cookies[:promoter], readonly: true %>
+                      <%= f.label :promoter,class: "form-label", readonly: true %><br />
+                      <%= f.text_field :parent,class: "form-control", autofocus: true, value: cookies[:promoter], readonly: true %>
                     </div>
                   <% end %>
                 </div>

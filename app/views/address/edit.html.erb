@@ -1,6 +1,6 @@
 <h1 style="margin-top: 70px;">Edit Address Id: <%= @address.id %></h1>
 <%= form_for @address, url: address_path(@address), method: :patch do |f| %>
-  <%= render partial: 'addressform', locals: {f: f, address: @address} %>
+  <%= render partial: 'form', locals: {f: f, address: @address} %>
   <div class="container">
     <%= f.submit "Update",class: 'btn btn-primary ' %>
   </div>

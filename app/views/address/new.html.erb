@@ -1,7 +1,7 @@
 <h1 style="margin-top: 70px;">New Address1</h1>
 
 <%= form_for @address, url: address_index_path, method: :post do |f| %>
-    <%= render partial: 'addressform', locals: {f: f, address: @address} %>
+    <%= render partial: 'form', locals: {f: f, address: @address} %>
     <div class="container">
       <%= f.submit "Save address",class: 'btn btn-primary ' %>
     </div>

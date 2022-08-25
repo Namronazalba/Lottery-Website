@@ -1,0 +1,22 @@
+<div style="margin-top: 100px; margin-bottom: 100px">
+  <div class="text-center  mx-auto">
+    <div>
+      <%= link_to (image_tag @item.image.url, style: "width: 90%;" if @item.image?), users_lottery_path(@item) %>
+    </div>
+    <br>
+    <div><%= @item.name %></div>
+    <br>
+  </div>
+
+  <div class="text-center  mx-auto">
+    <%= form_for @bet, url: users_lotteries_path, method: :post do |f| %>
+      <%= f.number_field :coins, class: 'form-control text-center  mx-auto' %>
+      <br>
+      <%= f.hidden_field :item_id, value: @item.id %>
+      <%= f.hidden_field :batch_count, value: @item.batch_count %>
+      <%= f.submit "Bet now", class: 'btn btn-primary btn-lg btn-block text-center  mx-auto', style: 'margin-buttom: 10px;' %><br><br>
+      </div>
+    <% end %>
+    </div>
+</div>
+<%= render "layouts/sharednav/nav" %>

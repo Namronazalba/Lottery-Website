@@ -14,8 +14,9 @@
     <div style="display: inline-block;text-align: center;">
       <div>
         <% @items.each do |item| %>
+          <%= render "layouts/errormsg/errormsg" %>
           <div style="display: inline-block;width: 40%;margin-bottom: 10px;">
-                <%= link_to  (image_tag "http://localhost:3000/#{item.image.url}", style: "width: 100%;" if item.image?),users_lottery_path(item) %>  <br>
+                <%= link_to  (image_tag item.image.url, style: "width: 100%;" if item.image?),users_lottery_path(item) %>  <br>
                 <%= item.name %>
         </div>
         <% end %>

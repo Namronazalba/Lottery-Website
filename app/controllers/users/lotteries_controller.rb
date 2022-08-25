@@ -6,10 +6,12 @@ class Users::LotteriesController < UsersController
     @categories = Category.all
     @items = Item.active
     @items = @items.filter_by_category(params[:category]) if params[:category].present?
+
   end
 
   def show
     @bet = Bet.new
+    @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
   end
 
   def create

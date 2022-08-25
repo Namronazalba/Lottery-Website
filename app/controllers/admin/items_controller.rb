@@ -35,10 +35,15 @@ class Admin::ItemsController < AdminController
   end
 
   def destroy
-    if @item.destroy
+    if @item.bets.size == 0
+      @item.destroy
       flash[:alert] = "Deleted successfully"
       redirect_to admin_items_path
+    else
+      flash[:alert] = "Item has bet, unable to delete this record"
+      redirect_to admin_items_path
     end
+
   end
 
   private

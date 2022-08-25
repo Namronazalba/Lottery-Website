@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :category
+  has_many :bets
   validates :image, :name, :quantity, :minimum_bet, :batch_count, :online_at, :offline_at, :start_at, :status, presence: true
   scope :filter_by_category, -> (category) { includes(:category).where(category: {name: category}) }
 

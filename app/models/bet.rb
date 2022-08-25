@@ -17,9 +17,13 @@ class Bet < ApplicationRecord
       transitions from: :betting, to: :lost
     end
 
-    event :cancel do
+    event :cancel, after: :refund do
       transitions from: :betting, to: :cancelled
     end
+  end
+
+  def refund
+    self.user.update(coins: user.coins+1)
   end
 
   def generate_serialnumber

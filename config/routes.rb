@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     root :to => 'home#index'
     get 'profile', to: 'home#me'
     namespace :users, path: '' do
-      get 'lotteries', to: 'lottery#index'
+      resources 'lotteries', only: [:show, :index, :create]
     end
   end
 
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :userlists
       resources :items
       resources :categories
+      resources :bets
     end
 
   end

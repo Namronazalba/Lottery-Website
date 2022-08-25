@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_17_020045) do
+ActiveRecord::Schema.define(version: 2022_08_19_053808) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "name"
@@ -44,8 +44,17 @@ ActiveRecord::Schema.define(version: 2022_08_17_020045) do
   end
 
   create_table "bets", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "batch_count"
+    t.integer "coins"
+    t.string "state"
+    t.datetime "start_date"
+    t.string "serial_number"
+    t.index ["item_id"], name: "index_bets_on_item_id"
+    t.index ["user_id"], name: "index_bets_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|

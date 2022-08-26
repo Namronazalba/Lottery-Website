@@ -25,7 +25,7 @@ Rails.application.routes.draw do
         put :ship
         put :deliver
         put :publish
-        put :ramove_publish
+        put :remove_publish
       end
     end
 

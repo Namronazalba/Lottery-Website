@@ -3,7 +3,6 @@ class Winner < ApplicationRecord
   belongs_to :bet, optional: true
   belongs_to :user, optional: true
   belongs_to :address, optional: true
-  after_commit :generate_serialnumber
 
   include AASM
   aasm column: :state do
@@ -41,13 +40,5 @@ class Winner < ApplicationRecord
     event :remove_publish do
       transitions from: :published, to: :remove_published
     end
-  end
-
-  def generate_serialnumber
-    ActiveRecord::Base.connection.execute("UPDATE `bets` SET `bets`.`serial_number` = CONCAT(DATE_FORMAT(CONVERT_TZ(bets.created_at, '+00:00', '+8:00'), '%y%m%d'),'-',#{item.id},'-',#{item.batch_count},'-',
-                                                  (SELECT LPAD(count(*), 4, 0)
-                                                   FROM `bets` where `bets`.`id` <= #{id} and DATE(CONVERT_TZ(bets.created_at, '+00:00', '+8:00')) = (select DATE(CONVERT_TZ(bets.created_at, '+00:00', '+8:00'))
-                                                   FROM bets WHERE bets.id = #{id})))
-                                                   WHERE bets.id = #{id}")
   end
 end

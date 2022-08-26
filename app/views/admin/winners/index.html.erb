@@ -59,7 +59,7 @@
       <tbody>
       <tr>
         <th scope="row"><%= win.id %></th>
-        <td><%= win.serial_number %></td>
+        <td><%= win.bet.serial_number %></td>
         <td><%= win.user.email %></td>
         <td><%= win.state %></td>
         <td><%= win.item_batch_count %></td>
@@ -70,7 +70,7 @@
           <%= button_to "Ship",  admin_winner_ship_path(win),class: "btn btn-primary", style:"width: 80px;",method: :put if win.may_ship? %>
           <%= button_to "Deliver",  admin_winner_deliver_path(win),class: "btn btn-primary", style:"width: 80px;",method: :put if win.may_deliver? %>
           <%= button_to "Publish",  admin_winner_publish_path(win),class: "btn btn-primary", style:"width: 80px;",method: :put if win.may_publish? %>
-          <%= button_to "Remove publish",  admin_winner_ramove_publish_path(win),class: "btn btn-primary", style:"width: 150px;",method: :put if win.may_remove_publish? %>
+          <%= button_to "Remove publish",  admin_winner_remove_publish_path(win),class: "btn btn-primary", style:"width: 150px;",method: :put if win.may_remove_publish? %>
         </td>
       </tr>
       </tbody>

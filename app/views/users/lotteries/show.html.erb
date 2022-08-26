@@ -1,3 +1,17 @@
+
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    .block{display: inline-block}
+</style>
+
 <div style="margin-top: 100px; margin-bottom: 100px">
   <div class="text-center  mx-auto w-50 p-3">
 
@@ -13,11 +27,21 @@
         </div>
         <br>
       </div>
-
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+      </div>
       <div class="text-center  mx-auto">
         <%= form_for @bet, url: users_lotteries_path, method: :post do |f| %>
           <div class="text-center  mx-auto w-50 p-3">
-            <%= f.number_field :coins, class: 'form-control text-center  mx-auto' %>
+            <div class="block">
+              <button class="btn btn-primary" id="minus">−</button>
+            </div>
+            <div class="block">
+              <%= f.number_field :coins, min: 1, value: 1, class: 'form-control text-center' %>
+            </div>
+            <div class="block">
+              <button class="btn btn-primary" id="plus">+</button>
+            </div>
           </div>
           <br>
           <%= f.hidden_field :item_id, value: @item.id %>
@@ -30,7 +54,7 @@
     <br>
 
     <div class="text-center  mx-auto border">
-      <div class="text-center  mx-auto border">
+      <div class="text-center  mx-auto border bg-dark text-light" style="padding: 5px">
         <h3>Serial number</h3>
       </div>
 
@@ -44,4 +68,25 @@
   </div>
   <br><br><br>
 </div>
+
+<script>
+    const minusButton = document.getElementById('minus');
+    const plusButton = document.getElementById('plus');
+    const inputField = document.getElementById('bet_coins');
+
+    minusButton.addEventListener('click', event => {
+        event.preventDefault();
+        const currentValue = Number(inputField.value) || 0;
+        if (currentValue > 1) {
+            inputField.value = currentValue - 1;
+        }
+    });
+
+    plusButton.addEventListener('click', event => {
+        event.preventDefault();
+        const currentValue = Number(inputField.value) || 0;
+        inputField.value = currentValue + 1;
+    });
+</script>
+
 <%= render "layouts/sharednav/nav" %>

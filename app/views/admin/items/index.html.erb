@@ -12,13 +12,14 @@
       <th scope="col">Category</th>
       <th scope="col">Quantity</th>
       <th scope="col">Minimum bet</th>
-      <th scope="col">State</th>
       <th scope="col">Batch count</th>
       <th scope="col">Online at</th>
       <th scope="col">Offline at</th>
       <th scope="col">Start at</th>
       <th scope="col">Status</th>
+      <th scope="col">State</th>
       <th>Action</th>
+      <th scope="col">State action</th>
     </tr>
     </thead>
     <% @items.each do |item| %>
@@ -30,19 +31,23 @@
         <td><%= item.category&.name %></td>
         <td><%= item.quantity %></td>
         <td><%= item.minimum_bet %></td>
-        <td><%= item.state %></td>
         <td><%= item.batch_count %></td>
         <td><%= item.online_at %></td>
         <td><%= item.offline_at %></td>
         <td><%= item.start_at %></td>
         <td><%= item.status%></td>
+        <td><%= item.state%></td>
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <%= link_to " edit ", edit_admin_item_path(item), class: "btn btn-info ", style:"width: 70px;" %>
             <%= link_to "delete", admin_item_path(item), method: :delete, class: "btn btn-danger", style:"width: 70px;" %>
           </div>
-
-
+        </td>
+        <td>
+          <%= button_to "Start",admin_item_start_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_start? %>
+          <%= button_to "Pause",admin_item_pause_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_pause? %>
+          <%= button_to "End",admin_item_end_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_end? %>
+          <%= button_to "Cancel",admin_item_cancel_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_cancel? %>
         </td>
       </tr>
       </tbody>

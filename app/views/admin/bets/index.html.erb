@@ -1,0 +1,37 @@
+<%= render "layouts/navbar_admin/navadmin" %>
+
+<div class="main "><br>
+  <table class="table table-striped border border-success">
+    <h2 scope="col">All Bets</h2>
+    <thead>
+    <tr>
+      <th scope="col">ID#</th>
+      <th scope="col">User ID</th>
+      <th scope="col">Item name</th>
+      <th scope="col">Batch count</th>
+      <th scope="col">Coins</th>
+      <th scope="col">State</th>
+      <th scope="col">Serial number</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <% @bets.each do |bet| %>
+      <tbody>
+      <tr>
+        <th scope="row"><%= bet.id %></th>
+        <td><%= bet.user.id %></td>
+        <td><%= bet.item.name %></td>
+        <td><%= bet.batch_count %></td>
+        <td><%= bet.coins %></td>
+        <td><%= bet.state %></td>
+        <td><%= bet.serial_number %></td>
+        <td><%= bet.item.created_at %></td>
+        <td>
+          <%= button_to "cancel", admin_bet_cancel_path(bet),class: "btn btn-primary", style:"width: 80px;", method: :put if bet.may_cancel? %>
+        </td>
+      </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>

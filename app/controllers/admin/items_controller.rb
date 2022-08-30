@@ -1,6 +1,7 @@
 class Admin::ItemsController < AdminController
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :destroy, :start, :pause, :end, :cancel]
   before_action :set_default_batchcount, only: :create
+
 
   def index
     @items = Item.all
@@ -12,8 +13,7 @@ class Admin::ItemsController < AdminController
 
   def create
     @item = Item.new(items_params)
-    if @item.quantity >= 1 && @item.minimum_bet >= 1
-      @item.save
+    if @item.save
       redirect_to admin_items_path
     else
       flash[:alert] = "Quantity or minimum bet must be 1 or above"
@@ -24,8 +24,7 @@ class Admin::ItemsController < AdminController
   def edit; end
 
   def update
-    if params[:item][:quantity].to_i >= 1 && params[:item][:minimum_bet].to_i >= 1
-      @item.update(items_params)
+      if @item.update(items_params)
       flash[:alert] = "Updated successfully"
       redirect_to admin_items_path
     else
@@ -43,9 +42,31 @@ class Admin::ItemsController < AdminController
       flash[:alert] = "Item has bet, unable to delete this record"
       redirect_to admin_items_path
     end
-
   end
 
+  def start
+    @item.start!
+    flash[:alert] = "Started successfully!"
+    redirect_to admin_items_path
+  end
+
+  def pause
+    @item.pause!
+    flash[:alert] = "Paused successfully"
+    redirect_to admin_items_path
+  end
+
+  def end
+    @item.end!
+    flash[:alert] = "Ended successfully!"
+    redirect_to admin_items_path
+  end
+
+  def cancel
+    @item.cancel!
+    flash[:alert] = "Cancelled successfully!"
+    redirect_to admin_items_path
+  end
   private
 
   def items_params
@@ -53,7 +74,7 @@ class Admin::ItemsController < AdminController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id]||params[:id])
   end
 
   def set_default_batchcount

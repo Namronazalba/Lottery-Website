@@ -8,9 +8,6 @@ class Admin::SessionsController < Devise::SessionsController
       redirect_to action: :new
     elsif user.admin?
       super
-    else
-      flash[:notice] = "Your account is not admin"
-      redirect_to action: :new
     end
   end
 end

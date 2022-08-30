@@ -8,9 +8,6 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to action: :new
     elsif user.client?
       super
-    else
-      flash[:notice] = "Your are not a client"
-      redirect_to action: :new
     end
   end
 end

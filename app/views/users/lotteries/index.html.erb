@@ -12,12 +12,15 @@
 
   <div>
     <div style="display: inline-block;text-align: center;">
+      <%= render "layouts/errormsg/errormsg" %>
       <div>
         <% @items.each do |item| %>
-          <%= render "layouts/errormsg/errormsg" %>
           <div style="display: inline-block;width: 40%;margin-bottom: 10px;">
-                <%= link_to  (image_tag item.image.url, style: "width: 100%;" if item.image?),users_lottery_path(item) %>  <br>
+                <%= link_to  (image_tag item.image.url, style: "width: 80%;" if item.image?),users_lottery_path(item) %>  <br>
                 <%= item.name %>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: <%= progress(item) %>%;" aria-valuenow="<%= progress(item) %>" aria-valuemin="0" aria-valuemax="100"><%= progress(item) %>%</div>
+            </div>
         </div>
         <% end %>
       </div>

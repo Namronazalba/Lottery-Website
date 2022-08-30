@@ -16,18 +16,16 @@ Rails.application.routes.draw do
       root :to => 'home#index'
       devise_for :users, controllers: { sessions: 'admin/sessions' }
       resources :userlists
-      resources :items
+      resources :items do
+        put :start, :pause, :end, :cancel
+      end
       resources :categories
-      resources :bets
+      resources :bets do
+        put :cancel
+      end
       resources :winners do
-        put :submit
-        put :pay
-        put :ship
-        put :deliver
-        put :publish
-        put :remove_publish
+        put :submit, :pay,:ship, :deliver, :publish, :remove_publish
       end
     end
-
   end
 end

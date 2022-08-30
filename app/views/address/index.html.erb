@@ -19,8 +19,7 @@
         <th scope="row"><%= address.id %></th>
         <td><%= address.name %></td>
         <td><%= address.phone_number %></td>
-        <td><%= address.street_address %>, <%= address.barangay.name %>, <%= address.city.name %>
-          , <%= address.province.name %>, <%= address.region.name %></td>
+        <td><%= concat_address(address) %></td>
         <td>
           <%= form_for address, method: :delete do |f| %>
             <%= link_to "show ", address_path(address), class: "btn btn-info" %>

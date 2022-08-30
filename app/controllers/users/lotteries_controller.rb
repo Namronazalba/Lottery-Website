@@ -4,14 +4,18 @@ class Users::LotteriesController < UsersController
 
   def index
     @categories = Category.all
-    @items = Item.active
+    @items = Item.active.starting
     @items = @items.filter_by_category(params[:category]) if params[:category].present?
 
   end
 
   def show
-    @bet = Bet.new
-    @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
+    if @items = Item.active.starting.find_by_id(params[:id])
+      @bet = Bet.new
+      @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
+    else
+      error_404
+    end
   end
 
   def create
@@ -47,5 +51,4 @@ class Users::LotteriesController < UsersController
   def bet_params
     params.require(:bet).permit(:coins, :item_id, :batch_count)
   end
-
 end

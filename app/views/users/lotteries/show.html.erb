@@ -28,7 +28,7 @@
         <br>
       </div>
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        <div class="progress-bar" role="progressbar" style="width: <%= progress(@item) %>%;" aria-valuenow="<%= progress(@item) %>" aria-valuemin="0" aria-valuemax="100"><%= progress(@item) %>%</div>
       </div>
       <div class="text-center  mx-auto">
         <%= form_for @bet, url: users_lotteries_path, method: :post do |f| %>

@@ -4,7 +4,6 @@ class Admin::WinnersController < AdminController
   def index
     @winners = Winner.includes(:bet, :user, :item)
     @winners = @winners.where(bet: {serial_number: params[:serial_number]}) if params[:serial_number].present?
-    @winners = @winners.where(winner: {name: params[:name]}) if params[:name].present?
     @winners = @winners.where(user: {email: params[:email]}) if params[:email].present?
     @winners = @winners.where(state: params[:state]) if params[:state].present?
     @winners = @winners.where(created_at: params[:start_date].to_datetime..params[:end_date].to_datetime) if params[:start_date].present? && params[:end_date].present?

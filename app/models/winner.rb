@@ -6,7 +6,7 @@ class Winner < ApplicationRecord
 
   include AASM
   aasm column: :state do
-    state :betting, initial: true
+    state :won, initial: true
     state :won, :claimed, :submitted, :paid, :shipped, :delivered, :shared, :published, :remove_published
 
     event :claim do

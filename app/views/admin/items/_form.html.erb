@@ -1,8 +1,4 @@
-<% if @item.errors.any? %>
-  <% @item.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-<% end %>
+<%= render "layouts/errormsg/errormsg" %>
 <div style="">
   <td><%= image_tag "http://localhost:3000/#{item. image.url}",style: 'height: 150px;' if item.image? %></td>
   <div>

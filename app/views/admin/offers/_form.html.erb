@@ -1,0 +1,32 @@
+<% if @offer.errors.any? %>
+  <% @offer.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+<div style="">
+  <td><%= image_tag offer.image.url,style: 'height: 150px;' if offer.image? %></td>
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :genre %>
+    <%= f.select(:genre, Offer.genres.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please select genre' }, { class: 'form-control mt-3' }) %>
+  </div>
+  <div>
+    <%= f.label :status %>
+    <%= f.select(:status, Offer.statuses.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please select status' }, { class: 'form-control mt-3' }) %>
+  </div>
+  <div>
+    <%= f.label :amount %>
+    <%= f.text_field :amount, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :coin %>
+    <%= f.text_field :coin, class: 'form-control' %>
+  </div>
+</div>

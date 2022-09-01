@@ -1,0 +1,9 @@
+<%= render "layouts/navbar_admin/navadmin"%>
+<div class="main">
+  <h1>Edit Item</h1>
+  <%= render "layouts/errormsg/errormsg" %>
+  <%= form_for @offer, url: admin_offer_path, method: :patch do |f| %>
+    <%= render partial: 'form', locals: {f: f, offer: @offer} %> <br>
+    <%= f.submit "Update",class: 'btn btn-primary' %> <br><br>
+  <% end %>
+</div>

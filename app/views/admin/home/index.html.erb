@@ -1,84 +1,8 @@
 <%= render "layouts/navbar_admin/navadmin" %>
 
-<div class="main">
-  <br>
-  <h1>Hello, <%= current_admin_user.email %></h1>
-</div>
-
+<br>
 <div class="main ">
   <div class="border p-3">
-    <%= form_tag({ url: admin_bets_path }, { method: :get }) do %>
-      <div>
-        <%= label_tag :find_by %>
-      </div>
-
-      <div class="d-inline p-2">
-        <%= label_tag :serial_number %>:
-        <%= text_field_tag :serial_number, '' %>
-      </div>
-
-      <div class="d-inline p-2">
-        <%= label_tag :name %>:
-        <%= text_field_tag :name, '' %>
-      </div>
-
-      <div class="d-inline p-2">
-        <%= label_tag :email %>:
-        <%= text_field_tag :email, '' %>
-      </div>
-
-      <div class="d-inline p-2">
-        <%= label_tag :state %>:
-        <%= text_field_tag :state, '' %>
-      </div>
-      <br><br>
-
-      <div>
-        <%= label_tag :date_created %>
-      </div>
-
-      <div class="d-inline p-2">
-        <%= label_tag :start_date %>:
-        <%= datetime_field_tag :start_date, '' %>
-      </div>
-
-      <div class="d-inline p-2">
-        <%= label_tag :end_date %>:
-        <%= datetime_field_tag :end_date, '' %>
-      </div>
-
-      <div>
-        <%= submit_tag :Search, class:"btn btn-primary" %>
-      </div>
-    <% end %>
+    <h1>Hello, <%= current_admin_user.email %></h1>
   </div>
-  <table class="table table-striped border border-success">
-    <h2 scope="col">All Bets</h2>
-    <thead>
-    <tr>
-      <th scope="col">ID#</th>
-      <th scope="col">User Email</th>
-      <th scope="col">Item name</th>
-      <th scope="col">Batch count</th>
-      <th scope="col">Coins</th>
-      <th scope="col">State</th>
-      <th scope="col">Serial number</th>
-      <th scope="col">Created at</th>
-    </tr>
-    </thead>
-    <% @bets.each do |bet| %>
-      <tbody>
-      <tr>
-        <th scope="row"><%= bet.id %></th>
-        <td><%= bet.user.email %></td>
-        <td><%= bet.item.name %></td>
-        <td><%= bet.batch_count %></td>
-        <td><%= bet.coins %></td>
-        <td><%= bet.state %></td>
-        <td><%= bet.serial_number %></td>
-        <td><%= bet.item.created_at %></td>
-      </tr>
-      </tbody>
-    <% end %>
-  </table>
 </div>

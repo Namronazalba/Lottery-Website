@@ -1,6 +1,6 @@
-class Users::LotteriesController < UsersController
-  before_action :set_bet_item, only: :create
-  before_action :set_item, only: :show
+class Users::LotteriesController < ApplicationController
+  before_action :authenticate_user!, only: :create
+  before_action :set_item, except: :index
 
   def index
     @categories = Category.all
@@ -41,11 +41,7 @@ class Users::LotteriesController < UsersController
   private
 
   def set_item
-    @item = Item.find(params[:id])
-  end
-
-  def set_bet_item
-    @item = Item.find(params[:bet][:item_id])
+    @item = Item.find(params[:id] || params[:bet][:item_id])
   end
 
   def bet_params

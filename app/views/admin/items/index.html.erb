@@ -44,10 +44,14 @@
           </div>
         </td>
         <td>
-          <%= button_to "Start",admin_item_start_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_start? %>
-          <%= button_to "Pause",admin_item_pause_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_pause? %>
-          <%= button_to "End",admin_item_end_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_end? %>
-          <%= button_to "Cancel",admin_item_cancel_path(item), class: "btn btn-primary", style:"width: 80px;", method: :put if item.may_cancel? %>
+          <div><%= button_to "Start",admin_item_start_path(item), class: "btn btn-primary", style:"width: 80px;margin-bottom: 2px;", method: :put if item.may_start? %></div>
+          <div><%= button_to "Pause",admin_item_pause_path(item), class: "btn btn-primary", style:"width: 80px;margin-bottom: 2px;", method: :put if item.may_pause? %></div>
+          <div><%= button_to "End",admin_item_end_path(item), class: "btn btn-primary", style:"width: 80px;margin-bottom: 2px;", method: :put if item.may_end? %></div>
+          <div><%= button_to "Cancel",admin_item_cancel_path(item), class: "btn btn-primary", style:"width: 80px;margin-bottom: 2px;", method: :put if item.may_cancel? %></div>
+
+
+
+
         </td>
       </tr>
       </tbody>

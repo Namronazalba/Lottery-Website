@@ -3,6 +3,8 @@ class Bet < ApplicationRecord
   belongs_to :user
   validates :coins , :batch_count, presence: true
   validates :coins, numericality: { greater_than: 0 }
+  scope :active_bets, -> (batch_count) { where(batch_count: batch_count).betting }
+
   after_commit :generate_serialnumber
 
   include AASM

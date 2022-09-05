@@ -1,0 +1,43 @@
+<%= render "layouts/imgslider/imgslider" %>
+
+<div>
+
+  <%= render "layouts/errormsg/errormsg" %>
+  <div>
+    <div style=" justify-content: center; display: flex;">
+      <% @offers.each do |offer| %>
+        <div style="padding: 10px;">
+          <button data-bs-toggle="modal" data-target="#exampleModalToggle" href="#order_<%= offer.id %>" style="border: none; background: transparent;">
+            <%= image_tag offer.image.url, style: "width: 90%;" if offer.image? %>  <br>
+          </button>
+
+          <div class="modal fade" id="order_<%= offer.id %>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabel">Shop now</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Do you want to pay ₱<%= offer.amount %> to get <%= offer.coin %> coins?
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <%= link_to "Confirm", users_shop_orders_path(offer), method: :put, class:"btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+  </div>
+  <br><br><br><br><br>
+
+  <!-- Modal -->
+
+
+
+<%= render "layouts/sharednav/nav" %>

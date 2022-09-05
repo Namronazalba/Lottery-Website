@@ -2,12 +2,18 @@ Rails.application.routes.draw do
 
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
-    resources :address
+    resources 'address',only: :index
     resources :invites
+
     root :to => 'home#index'
+
     get 'profile', to: 'home#me'
+
     namespace :users, path: '' do
       resources 'lotteries', only: [:show, :index, :create]
+      resources :shops  do
+      put :orders
+      end
     end
   end
 
@@ -18,6 +24,7 @@ Rails.application.routes.draw do
       resources :userlists
       resources :categories
       resources :offers
+
       resources :items do
         put :start, :pause, :end, :cancel
       end

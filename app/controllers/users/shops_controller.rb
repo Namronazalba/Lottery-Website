@@ -11,12 +11,13 @@ class Users::ShopsController < ApplicationController
     @order.amount = @offer.amount
     @order.coin = @offer.coin
     @order.user = current_user
+    @order.genre = :deposit
     @order.offer = @offer
     if @order.save
       flash[:notice] = "Order successfully"
       redirect_to users_shops_path
     else
-      render :new
+      render :index
     end
   end
 

@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   has_many :bets
   validates :image, :name, :quantity, :minimum_bet, :batch_count, :online_at, :offline_at, :start_at, :status, presence: true
   scope :filter_by_category, -> (category) { includes(:category).where(category: {name: category}) }
+  validates :quantity, :minimum_bet, numericality: { greater_than: 0 }
 
   enum status: [:active, :inactive]
 
@@ -79,6 +80,4 @@ class Item < ApplicationRecord
     winner = Winner.new( user: find_random_winner.user, bet: find_random_winner, item: find_random_winner.item, item_batch_count: find_random_winner.batch_count)
     winner.save!
   end
-
-
 end

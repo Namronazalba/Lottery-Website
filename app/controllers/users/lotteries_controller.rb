@@ -30,7 +30,7 @@ class Users::LotteriesController < ApplicationController
           @bet.save!
         end
       end
-      flash[:notice] = "successfully created"
+      flash[:notice] = "Betting successfully! Thanks for betting"
     rescue ActiveRecord::RecordInvalid => exception
       flash[:alert] = exception
     end

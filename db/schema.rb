@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_084403) do
+ActiveRecord::Schema.define(version: 2022_09_05_093648) do
 
   create_table "add_bet_id_to_winners", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -112,6 +112,21 @@ ActiveRecord::Schema.define(version: 2022_08_31_084403) do
     t.integer "coin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "offer_id"
+    t.string "serial_number"
+    t.string "state"
+    t.decimal "amount", precision: 10
+    t.integer "coin"
+    t.string "remarks"
+    t.integer "genre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["offer_id"], name: "index_orders_on_offer_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "provinces", charset: "utf8mb4", force: :cascade do |t|

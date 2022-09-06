@@ -24,7 +24,9 @@ Rails.application.routes.draw do
       resources :userlists
       resources :categories
       resources :offers
-
+      resources :orders do
+        put :submit, :cancel, :pay
+      end
       resources :items do
         put :start, :pause, :end, :cancel
       end

@@ -6,14 +6,17 @@ class Admin::BetsController < AdminController
   end
 
   def cancel
-    @bet.cancel!
-    flash[:alert] = "Cancelled successfully!"
+    if @bet.cancel!
+      flash[:alert] = "Cancelled successfully!"
+    else
+      flash[:alert] = "Failed to cancel!"
+    end
     redirect_to admin_bets_path
   end
 
   private
 
   def set_bet
-    @bet = Bet.find(params[:bet_id] || params[:id])
+    @bet = Bet.find(params[:bet_id])
   end
 end

@@ -1,21 +1,20 @@
 <%= render "layouts/navbar_admin/navadmin" %>
-<div class="main">
+<div class="main"><br>
   <div class="border p-3">
     <%= form_tag({ url: admin_offers_path }, { method: :get }) do %>
       <div>
-        <%= submit_tag :Search, class: "btn btn-primary" %>
-      </div>
-
-      <div class="d-inline p-2">
         <%= label_tag :status %>:
-        <%= select_tag :status, options_for_select(Offer.statuses.keys.map { |key| [key.humanize, key] }), { prompt: 'Search status', class:"dropdown w-50" } %>
+        <%= select_tag :status, options_for_select(Offer.statuses.keys.map { |key| [key.humanize, key] }), { prompt: 'Select one', class:"form-select dropdown w-50" } %>
       </div>
       <br>
-      <div class="d-inline p-2">
+      <div>
         <%= label_tag :genre %>:
-        <%= select_tag :genre, options_for_select(Offer.genres.keys.map { |key| [key.humanize, key] }), { prompt: 'Search genre', class:"dropdown w-50" } %>
+        <%= select_tag :genre, options_for_select(Offer.genres.keys.map { |key| [key.humanize, key] }), { prompt: 'Select one', class:"form-select dropdown w-50 " } %>
       </div>
-
+      <br>
+      <div>
+        <%= submit_tag :Search, class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 

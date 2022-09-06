@@ -6,13 +6,12 @@ class Users::LotteriesController < ApplicationController
     @categories = Category.all
     @items = Item.active.starting
     @items = @items.filter_by_category(params[:category]) if params[:category].present?
-
   end
 
   def show
     if @items = Item.active.starting.find_by_id(params[:id])
       @bet = Bet.new
-      @bets = @item.bets.where(user: current_user).where(batch_count: @item.batch_count)
+      @bets = @item.bets.where(user: current_user).active_bets(@item.batch_count)
     else
       error_404
     end

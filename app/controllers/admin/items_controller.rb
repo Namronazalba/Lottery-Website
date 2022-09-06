@@ -1,7 +1,6 @@
 class Admin::ItemsController < AdminController
-  before_action :set_item, only: [:edit, :update, :destroy, :start, :pause, :end, :cancel]
-  before_action :set_default_batchcount, only: :create
-
+  before_action :set_item, except: :index
+  before_action :set_default_batch_count, only: :create
 
   def index
     @items = Item.all
@@ -24,7 +23,7 @@ class Admin::ItemsController < AdminController
   def edit; end
 
   def update
-      if @item.update(items_params)
+    if @item.update(items_params)
       flash[:alert] = "Updated successfully"
       redirect_to admin_items_path
     else
@@ -34,8 +33,7 @@ class Admin::ItemsController < AdminController
   end
 
   def destroy
-    if @item.bets.size == 0
-      @item.destroy
+    if @item.destroy
       flash[:alert] = "Deleted successfully"
       redirect_to admin_items_path
     else
@@ -45,28 +43,41 @@ class Admin::ItemsController < AdminController
   end
 
   def start
-    @item.start!
-    flash[:alert] = "Started successfully!"
+    if @item.start!
+      flash[:alert] = "Started successfully!"
+    else
+      flash[:alert] = "Failed to start!"
+    end
     redirect_to admin_items_path
   end
 
   def pause
-    @item.pause!
-    flash[:alert] = "Paused successfully"
+    if @item.pause!
+      flash[:alert] = "Paused successfully"
+    else
+      flash[:alert] = "Failed to pause"
+    end
     redirect_to admin_items_path
   end
 
   def end
-    @item.end!
-    flash[:alert] = "Ended successfully!"
+    if @item.end!
+      flash[:alert] = "Ended successfully!"
+    else
+      flash[:alert] = "Failed to end!"
+    end
     redirect_to admin_items_path
   end
 
   def cancel
-    @item.cancel!
-    flash[:alert] = "Cancelled successfully!"
+    if @item.cancel!
+      flash[:alert] = "Cancelled successfully!"
+    else
+      flash[:alert] = "Failed to cancel!"
+    end
     redirect_to admin_items_path
   end
+
   private
 
   def items_params
@@ -74,10 +85,10 @@ class Admin::ItemsController < AdminController
   end
 
   def set_item
-    @item = Item.find(params[:item_id]||params[:id])
+    @item = Item.find(params[:item_id] || params[:id])
   end
 
-  def set_default_batchcount
+  def set_default_batch_count
     params[:item][:batch_count] = params.dig(:item, :zero)
   end
 end

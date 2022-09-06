@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   constraints(ClientDomainConstraint.new) do
     devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
-    resources 'address',only: :index
+    resources 'address',except: :show
     resources :invites
 
     root :to => 'home#index'

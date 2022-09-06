@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_05_093648) do
+ActiveRecord::Schema.define(version: 2022_09_06_052246) do
 
   create_table "add_bet_id_to_winners", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false

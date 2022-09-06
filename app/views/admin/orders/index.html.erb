@@ -1,14 +1,93 @@
 <%= render "layouts/navbar_admin/navadmin" %>
 <br>
+<style>
+    .main .cont {
+        width: 45%;
+        display: inline-block
+    }
+</style>
 <div class="main">
+
+  <%= form_tag({ url: admin_winners_path }, { method: :get }) do %>
+    <div>
+      <%= label_tag :find_by %>:
+    </div>
+
+    <div class="cont ">
+      <%= label_tag :serial_number %>
+      <%= text_field_tag :serial_number, '', class: "form-control w-100" %>
+    </div>
+
+    <div class="cont">
+      <%= label_tag :email %>
+      <%= text_field_tag :email, '', class: "form-control w-100" %>
+    </div>
+
+    <div class="cont">
+      <%= label_tag :state %>
+      <%= select_tag :state, options_for_select(Order.aasm.states.map(&:name), params[:state]), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
+    </div>
+
+    <div class="cont">
+      <%= label_tag :genre %>
+      <%= select_tag :genre, options_for_select(Order.genres.map), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
+    </div>
+
+    <div class="cont">
+      <%= label_tag :offer %>
+      <%= select_tag :offer, options_for_select(Offer.all.map(&:name)), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
+    </div>
+    <br><br>
+    <div>
+      <%= label_tag :date_created %>:
+    </div>
+
+    <div class="cont">
+      <%= label_tag :start_date %>
+      <%= datetime_field_tag :start_date, '', class: "form-control w-100" %>
+    </div>
+
+    <div class="cont">
+      <%= label_tag :end_date %>
+      <%= datetime_field_tag :end_date, '', class: "form-control w-100" %>
+    </div>
+    <br><br>
+    <div>
+      <%= submit_tag :Search, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
   <table class="table table-striped border border-success">
     <h2 scope="col">All Orders</h2>
     <thead>
     <tr>
-      <th scope="col">User ID</th>
-      <th scope="col">Offer ID</th>
+      <th scope="col">Subtotal coin</th>
+      <th scope="col">Subtotal amount</th>
+
+      <th scope="col">Total coin</th>
+      <th scope="col">Total amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%= @subtotal_coins %></td>
+      <td><%= @subtotal_amount %></td>
+
+      <td><%= @total_coins %></td>
+      <td><%= @total_amount %></td>
+    </tr>
+    </tbody>
+
+  </table>
+
+  <table class="table table-striped border border-success">
+    <h2 scope="col">All Orders</h2>
+    <thead>
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Offer</th>
       <th scope="col">Serial number</th>
-      <th scope="col">State </th>
+      <th scope="col">State</th>
       <th scope="col">Amount</th>
       <th scope="col">Coin</th>
       <th scope="col">Remarks</th>
@@ -19,8 +98,8 @@
     <% @orders.each do |order| %>
       <tbody>
       <tr>
-        <th scope="row"><%= order.user.id %></th>
-        <td><%= order.offer&.id %></td>
+        <th scope="row"><%= order.user.email %></th>
+        <td><%= order.offer&.name %></td>
         <td><%= order.serial_number %></td>
         <td><%= order.state %></td>
         <td><%= order.amount %></td>
@@ -28,9 +107,9 @@
         <td><%= order.remarks %></td>
         <td><%= order.genre %></td>
         <td>
-          <%= button_to "submit", admin_order_submit_path(order),class: "btn btn-primary", style:"width: 80px;", method: :put if order.may_submit? %>
-          <%= button_to "cancel", admin_order_cancel_path(order),class: "btn btn-primary", style:"width: 80px;", method: :put if order.may_cancel? %>
-          <%= button_to "pay", admin_order_pay_path(order),class: "btn btn-primary", style:"width: 80px;", method: :put if order.may_pay? %>
+          <%= button_to "submit", admin_order_submit_path(order), class: "btn btn-primary", style: "width: 80px;", method: :put if order.may_submit? %>
+          <%= button_to "cancel", admin_order_cancel_path(order), class: "btn btn-primary", style: "width: 80px;", method: :put if order.may_cancel? %>
+          <%= button_to "pay", admin_order_pay_path(order), class: "btn btn-primary", style: "width: 80px;", method: :put if order.may_pay? %>
         </td>
       </tr>
       </tbody>

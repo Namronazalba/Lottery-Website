@@ -7,9 +7,12 @@ class User < ApplicationRecord
   belongs_to :parent, class_name: "User", optional: true, counter_cache: :children_members
   has_many :children, class_name: "User", foreign_key: 'parent_id'
   has_many :bets
+  has_many :orders
+  has_many :winners
+  has_many :addresses
 
   validates :phone, phone: {allow_blank: true}
-  has_many :addresses
+
 
   mount_uploader :avatar, AvatarUploader
 

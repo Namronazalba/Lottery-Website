@@ -1,33 +1,100 @@
 <style>
-  .user-profile{
-      border: 1px solid;
-      padding: 10px;
-      margin: auto;
-      width: 60%;
-      margin-top: 100px;
-  }
-  .full-width{
-      width: 100%;
-      text-align: center;
-      padding: 5px;
-  }
-  .full-width .button
-</style>
+    .user-profile {
+        border: 1px solid;
+        padding: 10px;
+        margin: auto;
+        width: 60%;
+        margin-top: 100px;
+    }
 
-<div  class="user-profile">
+    .full-width {
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .border1 {
+        width: 60%;
+        margin: auto;
+    }
+
+    .error_msg {
+        margin-top: 70px;
+    }
+</style>
+<div class="error_msg">
+  <%= render "layouts/errormsg/errormsg" %>
+</div>
+
+<div class="user-profile">
   <div><%= image_tag current_user&.avatar.url if current_user.avatar? %></div>
-  <div><p>Username : <%=current_user.username %></p></div>
-  <br>
-  <div><p>Email : <%=current_user.email %></p></div>
-  <br>
-  <div><p>Coins : <%=current_user.coins %></p></div>
-  <br>
+  <div><p>Username : <%= current_user.username %></p></div>
+  <div><p>Email : <%= current_user.email %></p></div>
+  <div><p>Coins : <%= current_user.coins %></p></div>
   <button class="full-width">Cash in now</button>
   <br>
   <br>
   <div class="full-width">
-    <%= link_to "Me",edit_user_registration_path, {class: "btn btn-primary btn-lg btn-block", style:"width: 49%;"} if user_signed_in?%>
-    <%= link_to "Address", address_index_path, {class: "btn btn-primary btn-lg btn-block", style:"width: 49%;"} if user_signed_in?%>
+    <%= link_to "Me", edit_user_registration_path, { class: "btn btn-primary btn-lg btn-block", style: "width: 49%;" } if user_signed_in? %>
+    <%= link_to "Address", address_index_path, { class: "btn btn-primary btn-lg btn-block", style: "width: 49%;" } if user_signed_in? %>
   </div>
 </div>
+<br>
+<div class="border1">
+  <%= link_to "Order History", profile_path(activities: 'orders'), { class: "btn btn-primary" } if user_signed_in? %>
+  <%= link_to "Lottery History", profile_path(activities: 'bets'), { class: "btn btn-primary" } if user_signed_in? %>
+  <%= link_to "Winning History", profile_path(activities: 'winners'), { class: "btn btn-primary" } if user_signed_in? %>
+  <%= link_to "Invitation History", profile_path(activities: 'children'), { class: "btn btn-primary" } if user_signed_in? %>
+</div>
+<br>
+<div class="border1">
+  <% @orders&.each do |order| %>
+    <div class="border w-100 mx-auto p-3">
+      <p>Serial number: <%= order.serial_number %></p>
+      <p>Amount: <%= order.amount %></p>
+      <p>Coin: <%= order.coin %></p>
+      <p>Created at: <%= order.created_at %></p>
+      <p>State: <%= order.state %></p>
+    </div>
+    <br>
+  <% end %>
+</div>
+<br>
+
+<div class="border1">
+  <% @bets&.each do |bet| %>
+    <div class="border w-100 mx-auto p-3">
+      <p>Batch count: <%= bet.batch_count %></p>
+      <p>Coins: <%= bet.coins %></p>
+      <p>State: <%= bet.state %></p>
+      <p>Serial number: <%= bet.serial_number %></p>
+    </div>
+    <br>
+  <% end %>
+</div>
+<br>
+
+<div class="border1">
+  <% @winners&.each do |winner| %>
+    <div class="border w-100 mx-auto p-3">
+      <p>Item name: <%= winner.item.name %></p>
+      <p>Address: <%= concat_address(winner.address) %></p>
+      <p>Batch count: <%= winner.item_batch_count %></p>
+      <p>State: <%= winner.state %></p>
+      <%= link_to "Claim", users_winner_path(winner), class: 'btn btn-warning' if winner.may_claim? %>
+    </div>
+    <br>
+  <% end %>
+</div>
+<br>
+<div class="border1">
+  <% @children&.each do |children| %>
+    <div class="border w-100 mx-auto p-3">
+      <p>Name: <%= children.email %></p>
+      <p>Phone: <%= children.phone %></p>
+      <p>Username: <%= children.username %></p>
+    </div>
+    <br>
+  <% end %>
+</div><br><br><br><br><br>
 <%= render "layouts/sharednav/nav" %>

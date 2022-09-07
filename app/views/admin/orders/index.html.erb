@@ -7,58 +7,60 @@
     }
 </style>
 <div class="main">
+  <div class="border p-3">
+    <%= form_tag({ url: admin_winners_path }, { method: :get }) do %>
+      <div>
+        <%= label_tag :find_by %>:
+      </div>
 
-  <%= form_tag({ url: admin_winners_path }, { method: :get }) do %>
-    <div>
-      <%= label_tag :find_by %>:
-    </div>
+      <div class="cont ">
+        <%= label_tag :serial_number %>
+        <%= text_field_tag :serial_number, '', class: "form-control w-100" %>
+      </div>
 
-    <div class="cont ">
-      <%= label_tag :serial_number %>
-      <%= text_field_tag :serial_number, '', class: "form-control w-100" %>
-    </div>
+      <div class="cont">
+        <%= label_tag :email %>
+        <%= text_field_tag :email, '', class: "form-control w-100" %>
+      </div>
 
-    <div class="cont">
-      <%= label_tag :email %>
-      <%= text_field_tag :email, '', class: "form-control w-100" %>
-    </div>
+      <div class="cont">
+        <%= label_tag :state %>
+        <%= select_tag :state, options_for_select(Order.aasm.states.map(&:name), params[:state]), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
+      </div>
 
-    <div class="cont">
-      <%= label_tag :state %>
-      <%= select_tag :state, options_for_select(Order.aasm.states.map(&:name), params[:state]), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
-    </div>
+      <div class="cont">
+        <%= label_tag :genre %>
+        <%= select_tag :genre, options_for_select(Order.genres.map), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
+      </div>
 
-    <div class="cont">
-      <%= label_tag :genre %>
-      <%= select_tag :genre, options_for_select(Order.genres.map), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
-    </div>
+      <div class="cont">
+        <%= label_tag :offer %>
+        <%= select_tag :offer, options_for_select(Offer.all.map(&:name)), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
+      </div>
+      <br><br>
+      <div>
+        <%= label_tag :date_created %>:
+      </div>
 
-    <div class="cont">
-      <%= label_tag :offer %>
-      <%= select_tag :offer, options_for_select(Offer.all.map(&:name)), { prompt: 'Select one', class: "form-select dropdown w-100 " } %>
-    </div>
-    <br><br>
-    <div>
-      <%= label_tag :date_created %>:
-    </div>
+      <div class="cont">
+        <%= label_tag :start_date %>
+        <%= datetime_field_tag :start_date, '', class: "form-control w-100" %>
+      </div>
 
-    <div class="cont">
-      <%= label_tag :start_date %>
-      <%= datetime_field_tag :start_date, '', class: "form-control w-100" %>
-    </div>
-
-    <div class="cont">
-      <%= label_tag :end_date %>
-      <%= datetime_field_tag :end_date, '', class: "form-control w-100" %>
-    </div>
-    <br><br>
-    <div>
-      <%= submit_tag :Search, class: "btn btn-primary" %>
-    </div>
-  <% end %>
+      <div class="cont">
+        <%= label_tag :end_date %>
+        <%= datetime_field_tag :end_date, '', class: "form-control w-100" %>
+      </div>
+      <br><br>
+      <div>
+        <%= submit_tag :Search, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  <br>
 
   <table class="table table-striped border border-success">
-    <h2 scope="col">All Orders</h2>
+    <h2 scope="col">Subtotal and Total of Orders</h2>
     <thead>
     <tr>
       <th scope="col">Subtotal coin</th>

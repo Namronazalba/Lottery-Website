@@ -1,5 +1,5 @@
 class Admin::ItemsController < AdminController
-  before_action :set_item, except: :index
+  before_action :set_item, except: [:index, :new, :create]
   before_action :set_default_batch_count, only: :create
 
   def index

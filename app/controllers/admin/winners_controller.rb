@@ -14,8 +14,8 @@ class Admin::WinnersController < AdminController
       flash[:alert] = "Submitted successfully"
     else
       flash[:alert] = "Failed to submit"
-      redirect_to admin_winners_path
     end
+    redirect_to admin_winners_path
   end
 
   def pay
@@ -23,8 +23,8 @@ class Admin::WinnersController < AdminController
       flash[:alert] = "Paid successfully"
     else
       flash[:alert] = "Failed to pay"
-      redirect_to admin_winners_path
     end
+    redirect_to admin_winners_path
   end
 
   def ship
@@ -32,8 +32,8 @@ class Admin::WinnersController < AdminController
       flash[:alert] = "Shipped successfully"
     else
       flash[:alert] = "Failed to ship"
-      redirect_to admin_winners_path
     end
+    redirect_to admin_winners_path
   end
 
   def deliver
@@ -41,8 +41,8 @@ class Admin::WinnersController < AdminController
       flash[:alert] = "Delivered successfully"
     else
       flash[:alert] = "Failed to deliver"
-      redirect_to admin_winners_path
     end
+    redirect_to admin_winners_path
   end
 
   def publish
@@ -50,15 +50,16 @@ class Admin::WinnersController < AdminController
       flash[:alert] = "Published successfully"
     else
       flash[:alert] = "Failed to publish"
-      redirect_to admin_winners_path
     end
+    redirect_to admin_winners_path
   end
 
   def remove_publish
     if @winner.remove_publish!
       flash[:alert] = "Removed publish successfully"
+    else
+      flash[:alert] = "Failed to removed publish"
     end
-    flash[:alert] = "Failed to removed publish"
     redirect_to admin_winners_path
   end
 

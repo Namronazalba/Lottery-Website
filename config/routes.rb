@@ -11,9 +11,12 @@ Rails.application.routes.draw do
 
     namespace :users, path: '' do
       resources 'lotteries', only: [:show, :index, :create]
+
       resources :shops  do
       put :orders
       end
+
+      resources :winners
     end
   end
 

@@ -55,6 +55,7 @@
       <p>Coin: <%= order.coin %></p>
       <p>Created at: <%= order.created_at %></p>
       <p>State: <%= order.state %></p>
+      <%= link_to "Cancel", users_order_cancel_path(order), method: :put, class: 'btn btn-warning' if order.submitted? %>
     </div>
     <br>
   <% end %>

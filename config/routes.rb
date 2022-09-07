@@ -4,18 +4,17 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
     resources 'address',except: :show
     resources :invites
-
     root :to => 'home#index'
-
     get 'profile', to: 'home#me'
 
     namespace :users, path: '' do
       resources 'lotteries', only: [:show, :index, :create]
-
       resources :shops  do
       put :orders
       end
-
+      resources :orders do
+        put :cancel
+      end
       resources :winners, only: [:show, :update]
       resources :shares
     end

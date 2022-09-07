@@ -1,0 +1,17 @@
+<br><br><br><br>
+<%= form_for @winner, url: users_share_path(@winner), method: :patch do |f| %>
+  <div style="width: 50%;margin: auto;">
+    <h1>Share review</h1><br>
+    <div>
+      <%= f.label :picture, "Choose image", class: "btn btn-secondary" %>
+      <%= f.file_field :picture, class: 'form-control d-none', onchange: "previewFile(this)" %>
+    </div>
+    <div class="field">
+      <%= f.label :comment %>
+      <%= f.text_area :comment, class: 'form-control form-control-sm' %>
+    </div>
+    <%= f.submit "Share", class: 'border btn btn-primary form-control mt-3' %>
+  </div>
+
+<% end %>
+<%= render "layouts/sharednav/nav" %>

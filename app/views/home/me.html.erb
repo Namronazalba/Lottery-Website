@@ -82,6 +82,7 @@
       <p>Batch count: <%= winner.item_batch_count %></p>
       <p>State: <%= winner.state %></p>
       <%= link_to "Claim", users_winner_path(winner), class: 'btn btn-warning' if winner.may_claim? %>
+      <%= link_to "Share", users_share_path(winner), class: 'btn btn-warning' if winner.may_share? %>
     </div>
     <br>
   <% end %>

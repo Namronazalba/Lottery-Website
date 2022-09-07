@@ -1,0 +1,22 @@
+<br>
+<%= render "layouts/imgslider/imgslider" %>
+<center><%= link_to "I want to gacha", users_lotteries_path, class: 'border btn btn-primary form-control w-75 center' %></center>
+<br>
+<div style="margin: auto;width: 60%; ">
+  <% @winners.each do |winner| %>
+    <div style="border: 1px solid;margin: 10px;">
+      <div style="width: 500px;display: inline-block; text-align: center;padding: 5px;">
+        <%= image_tag winner.picture.url,style: "width: 30%;" if winner.picture? %>
+      </div>
+      <div style="width: 50%;display: inline-block;padding: 5px;">
+        <p>Username: <%= winner.user.username %></p>
+
+        <p> Comment: <%= winner.comment %></p>
+
+      </div>
+    </div>
+  <% end %>
+</div><br><br><br><br>
+
+
+<%= render "layouts/sharednav/nav" %>

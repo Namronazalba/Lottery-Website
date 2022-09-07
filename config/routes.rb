@@ -16,7 +16,8 @@ Rails.application.routes.draw do
       put :orders
       end
 
-      resources :winners
+      resources :winners, only: [:show, :update]
+      resources :shares
     end
   end
 

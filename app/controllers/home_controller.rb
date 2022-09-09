@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!,except: :index
 
-  def index; end
+  def index
+    @winners = Winner.published.limit(3)
+  end
 
   def me
     @orders = current_user.orders.includes(:user) if params[:activities] == 'orders' || params[:activities].blank?

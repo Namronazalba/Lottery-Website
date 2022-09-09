@@ -6,7 +6,9 @@
         display: inline-block
     }
 </style>
+
 <div class="main">
+  <%= render "layouts/alert_msg/alert_notice" %>
   <div class="border p-3">
     <%= form_tag({ url: admin_winners_path }, { method: :get }) do %>
       <div>

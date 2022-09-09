@@ -13,6 +13,7 @@
       <th scope="col">Total used coins</th>
       <th scope="col">Children members</th>
       <th scope="col">Phone number</th>
+      <th scope="col">Ballance operate</th>
     </tr>
     </thead>
     <% @users.each do |user| %>
@@ -27,8 +28,10 @@
         <td scope="col"></td>
         <td scope="col"><%= user.children_members %></td>
         <td scope="col"><%= user.phone %></td>
+        <td><%= link_to " Operate ", new_admin_userlist_increase_path(user), class: "btn btn-info ", style:"width: auto;" %></td>
       </tr>
       </tbody>
+
     <% end %>
   </table>
 

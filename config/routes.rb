@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     namespace :admin, path: '' do
       root :to => 'home#index'
       devise_for :users, controllers: { sessions: 'admin/sessions' }
-      resources :userlists
+
+      resources :userlists do
+        resources :increase, :deduct, :bonus, only: [:create, :new]
+      end
+
       resources :categories
       resources :offers
       resources :orders do

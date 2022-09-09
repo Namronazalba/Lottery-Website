@@ -4,7 +4,7 @@ class Winner < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :address, optional: true
 
-  mount_uploader :picture, ImageUploader
+  mount_uploader :picture, AvatarUploader
 
   include AASM
   aasm column: :state do

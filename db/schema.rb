@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_06_052246) do
+ActiveRecord::Schema.define(version: 2022_09_08_081624) do
 
   create_table "add_bet_id_to_winners", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2022_09_06_052246) do
     t.bigint "offer_id"
     t.string "serial_number"
     t.string "state"
-    t.decimal "amount", precision: 10
+    t.decimal "amount", precision: 10, default: "0"
     t.integer "coin"
     t.string "remarks"
     t.integer "genre"

@@ -1,0 +1,63 @@
+<%= render "layouts/navbar_admin/navadmin" %>
+<div class="main">
+  <h1>Ballance operate</h1>
+  <%= render "layouts/alert_msg/alert_notice" %>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <%= link_to "Increase", new_admin_userlist_increase_path(@user), class: "nav-link " if admin_user_signed_in? %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Deduct", new_admin_userlist_deduct_path(@user), class: "nav-link active" if admin_user_signed_in? %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Bonus",new_admin_userlist_bonu_path(@user), class: "nav-link " if admin_user_signed_in? %>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <%= form_for @order, url: admin_userlist_deduct_index_path(@user), method: :post do |f| %>
+            <div>
+              <%= f.label :coin %>
+              <%= f.number_field :coin, min:1, value:1, class: 'form-control' %>
+            </div>
+
+            <div>
+              <%= f.label :remarks %>
+              <%= f.text_field :remarks, class: 'form-control' %>
+            </div>
+
+            <%= f.submit "Save", class: 'btn btn-primary mt-2', style: 'margin-buttom: 10px; width: auto;' %><br><br>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+    <%= form_for @user, url: admin_userlists_path, method: :patch do |f| %>
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <%= f.label :username, class:"input-group-text" %>
+            <%= f.text_field :username, class: 'form-control' %>
+          </div>
+
+          <div class="input-group mb-3">
+            <%= f.label :promoter_name, class:"input-group-text" %>
+            <%= f.text_field :parent, class: 'form-control' %>
+          </div>
+
+          <div class="input-group mb-3">
+            <%= f.label :coins, class:"input-group-text" %>
+            <%= f.text_field :coins, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  </div>
+
+</div>

@@ -11,7 +11,7 @@ class Admin::WinnersController < AdminController
 
   def submit
     if @winner.submit!
-      flash[:alert] = "Submitted successfully"
+      flash[:notice] = "Submitted successfully"
     else
       flash[:alert] = "Failed to submit"
     end
@@ -20,7 +20,7 @@ class Admin::WinnersController < AdminController
 
   def pay
     if @winner.pay!
-      flash[:alert] = "Paid successfully"
+      flash[:notice] = "Paid successfully"
     else
       flash[:alert] = "Failed to pay"
     end
@@ -29,7 +29,7 @@ class Admin::WinnersController < AdminController
 
   def ship
     if @winner.ship!
-      flash[:alert] = "Shipped successfully"
+      flash[:notice] = "Shipped successfully"
     else
       flash[:alert] = "Failed to ship"
     end
@@ -38,7 +38,7 @@ class Admin::WinnersController < AdminController
 
   def deliver
     if @winner.deliver!
-      flash[:alert] = "Delivered successfully"
+      flash[:notice] = "Delivered successfully"
     else
       flash[:alert] = "Failed to deliver"
     end
@@ -47,7 +47,7 @@ class Admin::WinnersController < AdminController
 
   def publish
     if @winner.publish!
-      flash[:alert] = "Published successfully"
+      flash[:notice] = "Published successfully"
     else
       flash[:alert] = "Failed to publish"
     end

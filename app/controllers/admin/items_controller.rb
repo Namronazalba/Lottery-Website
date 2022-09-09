@@ -13,9 +13,10 @@ class Admin::ItemsController < AdminController
   def create
     @item = Item.new(items_params)
     if @item.save
+      flash[:notice] = "Item added successfully!"
       redirect_to admin_items_path
     else
-      flash[:alert] = "Quantity or minimum bet must be 1 or above"
+      flash[:notice] = "Quantity or minimum bet must be 1 or above"
       render :new
     end
   end
@@ -24,17 +25,17 @@ class Admin::ItemsController < AdminController
 
   def update
     if @item.update(items_params)
-      flash[:alert] = "Updated successfully"
+      flash[:notice] = "Item updated successfully!"
       redirect_to admin_items_path
     else
-      flash[:alert] = "Quantity or minimum bet must be 1 or above"
+      flash[:notice] = "Quantity or minimum bet must be 1 or above"
       render :edit
     end
   end
 
   def destroy
     if @item.destroy
-      flash[:alert] = "Deleted successfully"
+      flash[:alert] = "Item deleted successfully!"
       redirect_to admin_items_path
     else
       flash[:alert] = "Item has bet, unable to delete this record"
@@ -44,7 +45,7 @@ class Admin::ItemsController < AdminController
 
   def start
     if @item.start!
-      flash[:alert] = "Started successfully!"
+      flash[:notice] = "Started successfully!"
     else
       flash[:alert] = "Failed to start!"
     end
@@ -53,7 +54,7 @@ class Admin::ItemsController < AdminController
 
   def pause
     if @item.pause!
-      flash[:alert] = "Paused successfully"
+      flash[:notice] = "Paused successfully"
     else
       flash[:alert] = "Failed to pause"
     end

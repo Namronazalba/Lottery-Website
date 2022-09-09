@@ -22,7 +22,7 @@ class Admin::CategoriesController < AdminController
 
   def update
     if @category.update(categories_params)
-      flash[:alert] = "Updated successfully"
+      flash[:notice] = "Updated successfully"
       redirect_to admin_categories_path
     else
       render :edit

@@ -20,7 +20,7 @@
 
 
   <h1 style="color: blue; margin-top: 15px;">Offer list</h1>
-  <%= render "layouts/errormsg/errormsg" %>
+  <%= render "layouts/alert_msg/alert_notice" %>
   <%= link_to 'Add', new_admin_offer_path, class: 'btn btn-success mb-4', style: "width: 70px;" %>
   <table class="table table-striped border border-success">
     <thead>
@@ -48,7 +48,7 @@
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <%= link_to " edit ", edit_admin_offer_path(offer), class: "btn btn-info ", style: "width: 70px;" %>
-            <%= link_to "delete", admin_offer_path(offer), method: :delete, class: "btn btn-danger", style: "width: 70px;" %>
+            <%= link_to "delete", admin_offer_path(offer),data:{confirm:'Are you sure do you want to delete?'} , method: :delete, class: "btn btn-danger", style: "width: 70px;" %>
           </div>
         </td>
       </tr>

@@ -18,17 +18,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     if params[:user][:current_password].present?
       if current_user.update_with_password(password_params)
-        flash[:alert]="Updated successfully!"
+        flash[:notice]="User password updated successfully!"
         sign_in @user, :bypass => true
-        redirect_to edit_user_registration_path
+        redirect_to profile_path
       else
         flash[:error] = 'Oh No! Something Went Wrong in password update field, Please Try Again.'
         render :edit
       end
     else
       if current_user.update(userinfo_params)
-        flash[:alert]="Updated successfully!"
-        redirect_to edit_user_registration_path
+        flash[:notice]="User info updated successfully!"
+        redirect_to profile_path
       else
         flash[:error] = 'Oh No! Something Went Wrong, Please Try Again.'
         render :edit

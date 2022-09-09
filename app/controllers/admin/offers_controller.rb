@@ -15,7 +15,7 @@ class Admin::OffersController < AdminController
     @offer = Offer.new(offer_params)
     if @offer.save
       redirect_to admin_offers_path
-      flash[:alert] = "Offer saved successfully!"
+      flash[:notice] = "Offer saved successfully!"
     else
       render :new
     end
@@ -25,7 +25,7 @@ class Admin::OffersController < AdminController
 
   def update
     if @offer.update(offer_params)
-      flash[:alert] = "Updated successfully"
+      flash[:notice] = "Updated successfully"
       redirect_to admin_offers_path
     else
       render :edit

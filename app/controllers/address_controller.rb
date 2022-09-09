@@ -15,6 +15,7 @@ class AddressController < ApplicationController
     @address = Address.new(address_params)
     @address.user = current_user
     if @address.save
+      flash[:notice] = "New address added successfully!"
       redirect_to address_index_path
     else
       render :new
@@ -25,7 +26,7 @@ class AddressController < ApplicationController
 
   def update
     if @address.update(address_params)
-      flash[:alert] = "Updated successfully"
+      flash[:notice] = "Updated successfully"
       redirect_to address_index_path
     else
       render :edit

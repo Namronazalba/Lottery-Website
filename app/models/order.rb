@@ -22,26 +22,21 @@ class Order < ApplicationRecord
 
     event :cancel do
       transitions from: [:pending, :submitted], to: :cancelled
-      transitions from: :paid, to: :cancelled, after: :cancel_update_user_coin, guard: :coin_less_that_user_coins?
+      transitions from: :paid, to: :cancelled, after: :cancel_user_coin, guard: :coin_less_that_user_coins?
     end
 
-    event :pay do
-      transitions from: :submitted, to: :paid, after: :update_user_coin_on_pay
+    event :pay, after: :update_user_coin_on_pay do
+      transitions from: :submitted, to: :paid
+      transitions from: :pending, to: :paid, guard: :unless_coin_less_that_user_coins?
     end
   end
 
-  def cancel_update_user_coin
+  def cancel_user_coin
     if deduct?
-      user.update(coins: user.coins + coin)
+      user.update(coins: user.coins +  coin)
     else
       user.update(coins: user.coins - coin)
     end
-  end
-
-  def coin_less_that_user_coins?
-    return true if (user.coins >= coin) && !deduct?
-    errors.add(:base, "You deducted more coins than the user's total coins")
-    false
   end
 
   def update_user_coin_on_pay
@@ -52,9 +47,17 @@ class Order < ApplicationRecord
     end
   end
 
-  def deduct
-    return true if (user.coins > coin) && !deduct?
-    errors.add(:base, "You deducted too much coins")
+  def coin_less_that_user_coins?
+    return true if deduct?
+    return true if (user.coins >= coin)
+    errors.add(:base, "You deducted more coins than the user's total coins")
+    false
+  end
+
+  def unless_coin_less_that_user_coins?
+    return true unless deduct?
+    return true if (user.coins >= coin)
+    errors.add(:base, "Unless you deducted more coins than the user's total coins")
     false
   end
 

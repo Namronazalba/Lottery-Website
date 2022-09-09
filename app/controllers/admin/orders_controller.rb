@@ -12,14 +12,16 @@ class Admin::OrdersController < AdminController
     @orders = @orders.where(serial_number: params[:serial_number]) if params[:serial_number].present?
     @orders = @orders.where(genre: params[:genre]) if params[:genre].present?
     @orders = @orders.where(state: params[:state]) if params[:state].present?
-    @orders = @orders.where(created_at: params[:start_date].to_datetime..params[:end_date].to_datetime) if params[:start_date].present? && params[:end_date].present?
-
+    @orders = @orders.where(created_at: params[:start_date].to_datetime..params[:end_date].to_datetime) if params[:start_date].present? && params[:end_date].present
     @subtotal_coins = @orders.map(&:coin).sum
     @subtotal_amount = @orders.map(&:amount).sum
   end
+
+
+
   def submit
     if @order.submit!
-      flash[:alert] = "Submit successfully!"
+      flash[:notice] = "Submit successfully!"
     else
       flash[:alert] = "Failed to start!"
     end
@@ -28,7 +30,7 @@ class Admin::OrdersController < AdminController
 
   def cancel
     if @order.cancel!
-      flash[:alert] = "Cancelled successfully!"
+      flash[:notice] = "Cancelled successfully!"
     else
       flash[:alert] = "Failed to cancel!"
     end
@@ -37,7 +39,7 @@ class Admin::OrdersController < AdminController
 
   def pay
     if @order.pay!
-      flash[:alert] = "Payed successfully!"
+      flash[:notice] = "Payed successfully!"
     else
       flash[:alert] = "Failed to pay!"
     end
@@ -45,10 +47,6 @@ class Admin::OrdersController < AdminController
   end
 
   private
-
-  def oders_params
-    params.require(:order).permit(:user_id, :offer_id, :serial_number, :state, :amount, :coin, :remarks, :genre )
-  end
 
   def set_order
     @order = Order.find params[:order_id]

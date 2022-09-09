@@ -1,7 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :offer, optional: true
-  validates :amount, :coin, presence: true
 
   enum genre: [:deposit, :increase, :deduct, :bonus, :share]
 

@@ -9,10 +9,8 @@ Rails.application.routes.draw do
 
     namespace :users, path: '' do
       resources 'lotteries', only: [:show, :index, :create]
-      resources :shops  do
-      put :orders
-      end
-      resources :orders do
+      resources :shops
+      resources :orders, only: [:new, :create] do
         put :cancel
       end
       resources :winners, only: [:show, :update]

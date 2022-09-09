@@ -1,4 +1,5 @@
 <%= render "layouts/imgslider/imgslider" %>
+
 <div>
   <%= render "layouts/alert_msg/alert_notice" %>
   <div>
@@ -21,7 +22,10 @@
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <%= link_to "Confirm", users_shop_orders_path(offer), method: :put, class:"btn btn-primary" %>
+                  <%= form_tag users_orders_path, method: :post do %>
+                    <%= hidden_field_tag  :offer_id, offer.id %>
+                    <%= submit_tag "Submit", class:"btn btn-primary" %>
+                  <% end %>
                 </div>
               </div>
             </div>

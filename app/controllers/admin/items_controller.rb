@@ -63,7 +63,7 @@ class Admin::ItemsController < AdminController
 
   def end
     if @item.end!
-      flash[:alert] = "Ended successfully!"
+      flash[:notice] = "Ended successfully!"
     else
       flash[:alert] = "Failed to end!"
     end
@@ -72,7 +72,7 @@ class Admin::ItemsController < AdminController
 
   def cancel
     if @item.cancel!
-      flash[:alert] = "Cancelled successfully!"
+      flash[:alert] = "Item cancelled!"
     else
       flash[:alert] = "Failed to cancel!"
     end

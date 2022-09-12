@@ -19,10 +19,15 @@ class Users::OrdersController < ApplicationController
     @order.genre = :deposit
     @order.offer = @offer
     if @order.save
-      flash[:notice] = "Order successfully"
+      if @order.may_submit? && @order.submit!
+        flash[:notice]= 'Order submit successfully!'
+      else
+        flash[:alert]= 'transaction failed'
+        @order.cancel!
+      end
       redirect_to users_shops_path
     else
-      render :index
+      render :new
     end
   end
 end

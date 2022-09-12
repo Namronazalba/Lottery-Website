@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def me
-    @orders = current_user.orders.includes(:user) if params[:activities] == 'orders' || params[:activities].blank?
+    @orders = current_user.orders.includes(:user).order(id: :desc) if params[:activities] == 'orders' || params[:activities].blank?
     @bets = current_user.bets.includes(:user) if params[:activities] == 'bets'
     @winners = current_user.winners.includes(:user) if params[:activities] == 'winners'
     @children = current_user.children if params[:activities] == 'children'

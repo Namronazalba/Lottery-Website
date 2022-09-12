@@ -30,7 +30,7 @@
               <%= f.text_field :remarks, class: 'form-control' %>
             </div>
 
-            <%= f.submit "Save", class: 'btn btn-primary mt-2', style: 'margin-buttom: 10px; width: auto;' %><br><br>
+            <%= f.submit "Save", data:{confirm:'Are you sure do you want to give bonus coin in this user?'}, class: 'btn btn-primary mt-2', style: 'margin-buttom: 10px; width: auto;' %><br><br>
           <% end %>
         </div>
       </div>
@@ -52,7 +52,7 @@
 
             <div class="input-group mb-3">
               <%= f.label :coins, class:"input-group-text" %>
-              <%= f.text_field :coins, class: 'form-control' %>
+              <%= f.text_field :coins, class: 'form-control', :readonly => true %>
             </div>
           </div>
         </div>

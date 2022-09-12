@@ -46,7 +46,7 @@
           <br>
           <%= f.hidden_field :item_id, value: @item.id %>
           <%= f.hidden_field :batch_count, value: @item.batch_count %>
-          <%= f.submit "Bet now", class: 'btn btn-primary btn-lg btn-block text-center  mx-auto', style: 'margin-buttom: 10px;' %>
+          <%= f.submit "Bet now", data:{confirm:'Are you sure do you want to bet on this item?'}, class: 'btn btn-primary btn-lg btn-block text-center  mx-auto', style: 'margin-buttom: 10px;' %>
           <br><br>
         <% end %>
       </div>

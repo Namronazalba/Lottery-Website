@@ -28,7 +28,7 @@
               <%= f.label :remarks %>
               <%= f.text_field :remarks, class: 'form-control' %>
             </div>
-            <%= f.submit "Save", class: 'btn btn-primary mt-2', style: 'margin-buttom: 10px; width: auto;' %><br><br>
+            <%= f.submit "Save", data:{confirm:'Are you sure do you want to increase the coins of this user?'}, class: 'btn btn-primary mt-2', style: 'margin-buttom: 10px; width: auto;' %><br><br>
           <% end %>
         </div>
       </div>
@@ -49,7 +49,7 @@
 
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Coins</span>
-            <input type="text" class="form-control" value="<%= @user.coins %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control" value="<%= @user.coins %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
           </div>
         </div>
       </div>

@@ -18,23 +18,28 @@ class Users::LotteriesController < ApplicationController
   end
 
   def create
-    begin
-      loop = params[:bet][:coins].to_i
-      params[:bet][:coins] = 1
-      ActiveRecord::Base.transaction do
-        loop.times do
-          @bet = Bet.new(bet_params)
-          @bet.item = @item
-          @bet.user = current_user
-          @bet.batch_count = @item.batch_count
-          @bet.save!
+    if current_user.coins >= params[:bet][:coins].to_i
+      begin
+        loop = params[:bet][:coins].to_i
+        params[:bet][:coins] = 1
+        ActiveRecord::Base.transaction do
+          loop.times do
+            @bet = Bet.new(bet_params)
+            @bet.item = @item
+            @bet.user = current_user
+            @bet.batch_count = @item.batch_count
+            @bet.save!
+          end
         end
+        redirect_to users_lotteries_path(@item.bets)
+        flash[:notice] = "Betting successfully! Thanks for betting"
+        rescue ActiveRecord::RecordInvalid => exception
+        flash[:alert] = exception
       end
-      flash[:notice] = "Betting successfully! Thanks for betting"
-    rescue ActiveRecord::RecordInvalid => exception
-      flash[:alert] = exception
+      else
+      redirect_to users_shops_path
+      flash[:alert] = "Your coins is not enough, buy some coins to make a bet"
     end
-    redirect_to users_lotteries_path
   end
 
   private
@@ -45,5 +50,9 @@ class Users::LotteriesController < ApplicationController
 
   def bet_params
     params.require(:bet).permit(:coins, :item_id, :batch_count)
+  end
+
+  def not_enough_ballance
+
   end
 end

@@ -13,7 +13,7 @@ class Admin::DeductController < AdminController
       if @order.may_pay? && @order.pay!
         flash[:alert]= 'Deducted successfully!'
       else
-        flash[:alert]= 'transaction failed'
+        flash[:alert]= 'Failed to deduct, user coin cannot be less than zero'
         @order.cancel!
       end
       redirect_to new_admin_userlist_deduct_path

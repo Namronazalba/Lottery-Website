@@ -75,7 +75,7 @@
         <td><%= bet.serial_number %></td>
         <td><%= bet.item.created_at %></td>
         <td>
-          <%= button_to "cancel", admin_bet_cancel_path(bet),class: "btn btn-primary", style:"width: 80px;", method: :put if bet.may_cancel? %>
+          <%= button_to "cancel", admin_bet_cancel_path(bet), data:{confirm:'Are you sure do you want to cancel?'}, class: "btn btn-primary", style:"width: 80px;", method: :put if bet.may_cancel? %>
         </td>
       </tr>
       </tbody>

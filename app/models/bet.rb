@@ -1,11 +1,12 @@
 class Bet < ApplicationRecord
   belongs_to :item
   belongs_to :user
-  validates :coins , :batch_count, presence: true
+  validates :coins, :batch_count, presence: true
   validates :coins, numericality: { greater_than: 0 }
   scope :active_bets, -> (batch_count) { where(batch_count: batch_count).betting }
 
   after_commit :generate_serialnumber
+  after_create :deduct_coin
 
   include AASM
   aasm column: :state do
@@ -25,7 +26,11 @@ class Bet < ApplicationRecord
   end
 
   def refund
-    self.user.update(coins: user.coins+1)
+    self.user.update(coins: user.coins + 1)
+  end
+
+  def deduct_coin
+    user.update(coins: user.coins - 1)
   end
 
   def generate_serialnumber
@@ -36,3 +41,5 @@ class Bet < ApplicationRecord
                                                    WHERE bets.id = #{id}")
   end
 end
+
+

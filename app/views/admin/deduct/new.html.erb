@@ -27,7 +27,7 @@
 
             <div>
               <%= f.label :remarks %>
-              <%= f.text_field :remarks, class: 'form-control' %>
+              <%= f.text_field :remarks,required: true, class: 'form-control' %>
             </div>
 
             <%= f.submit "Save", data:{confirm:'Are you sure do you want to deduct the coins of this user?'}, class: 'btn btn-primary mt-2', style: 'margin-buttom: 10px; width: auto;' %><br><br>
@@ -37,27 +37,25 @@
     </div>
 
     <div class="col">
-    <%= form_for @user, url: admin_userlists_path, method: :patch do |f| %>
       <div class="card">
         <div class="card-body">
           <div class="input-group mb-3">
-            <%= f.label :username, class:"input-group-text" %>
-            <%= f.text_field :username, class: 'form-control' %>
+            <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+            <input type="text" class="form-control" value="<%=@user.username %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
 
           <div class="input-group mb-3">
-            <%= f.label :promoter_name, class:"input-group-text" %>
-            <%= f.text_field :parent, class: 'form-control' %>
+            <span class="input-group-text" id="inputGroup-sizing-default">Promoter name</span>
+            <input type="text" class="form-control" value="<%= @user.parent&.username %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
 
           <div class="input-group mb-3">
-            <%= f.label :coins, class:"input-group-text" %>
-            <%= f.text_field :coins, class: 'form-control', :readonly => true %>
+            <span class="input-group-text" id="inputGroup-sizing-default">Coins</span>
+            <input type="text" class="form-control" value="<%= @user.coins %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
   </div>
 
 </div>

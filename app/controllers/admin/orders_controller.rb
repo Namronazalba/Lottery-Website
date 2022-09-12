@@ -2,7 +2,7 @@ class Admin::OrdersController < AdminController
   before_action :set_order, except: :index
 
   def index
-    @orders = Order.includes(:user, :offer)
+    @orders = Order.includes(:user, :offer).order(id: :desc)
 
     @total_coins = @orders.map(&:coin).sum
     @total_amount = @orders.map(&:amount).sum

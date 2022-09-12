@@ -1,7 +1,21 @@
 <%= render "layouts/navbar_admin/navadmin" %>
+
+
 <div class="main">
-  <h1 style="color: blue; margin-top: 15px;">User list</h1>
-  <table class="table">
+  <h1 style="color: blue; margin-top: 15px;">Invite list</h1>
+
+  <div>
+    <%= form_tag({ url: admin_invites_path }, { method: :get }) do %>
+
+      <div class="row ">
+        <div class="col"><%= text_field_tag :parent_email, params[:parent_email], class: "form-control form-input ", placeholder: "Parent email" %></div>
+        <div class="col"><%= submit_tag :Search, class: "btn btn-primary" %></div>
+      </div>
+    <% end %>
+  </div>
+  <br>
+
+  <table class="table border p-3">
     <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
@@ -10,10 +24,9 @@
       <th scope="col">Total deposit</th>
       <th scope="col">Members total deposit</th>
       <th scope="col">Coins</th>
+      <th scope="col">Created at</th>
       <th scope="col">Total used coins</th>
       <th scope="col">Children members</th>
-      <th scope="col">Phone number</th>
-      <th scope="col">Ballance operate</th>
     </tr>
     </thead>
     <% @users.each do |user| %>
@@ -23,18 +36,19 @@
         <td scope="col"><%= user.parent&.email %></td>
         <td scope="col"><%= user.email %></td>
         <td scope="col"><%= user.total_deposit %></td>
-        <td scope="col"><%= user.phone %></td>
+        <td scope="col">
+          <%= user.children.sum('total_deposit') %>
+        </td>
         <td scope="col"><%= user.coins %></td>
+        <td scope="col"><%= user.created_at %></td>
         <td scope="col">
           <%= user.bets.where.not(state: :cancelled).count%>
         </td>
         <td scope="col"><%= user.children_members %></td>
-        <td scope="col"><%= user.phone %></td>
-        <td><%= link_to " Operate ", new_admin_userlist_increase_path(user), class: "btn btn-info ", style:"width: auto;" %></td>
       </tr>
       </tbody>
 
     <% end %>
   </table>
-
 </div>
+

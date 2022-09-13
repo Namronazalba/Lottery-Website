@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :winners
   has_many :addresses
-
+  has_many :newstickers, foreign_key: "admin_id"
   validates :phone, phone: {allow_blank: true}
 
 

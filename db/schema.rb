@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_08_081624) do
+ActiveRecord::Schema.define(version: 2022_09_13_045047) do
 
   create_table "add_bet_id_to_winners", charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -101,6 +101,16 @@ ActiveRecord::Schema.define(version: 2022_09_08_081624) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["province_id"], name: "index_municipalities_on_province_id"
+  end
+
+  create_table "newstickers", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "admin_id"
+    t.integer "status"
+    t.string "content"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_newstickers_on_admin_id"
   end
 
   create_table "offers", charset: "utf8mb4", force: :cascade do |t|

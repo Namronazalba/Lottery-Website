@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
       resources :categories
       resources :offers
+      resources :newstickers
       resources :invites, only: :index
       resources :orders do
         put :submit, :cancel, :pay

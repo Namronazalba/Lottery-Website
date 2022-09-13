@@ -1,0 +1,8 @@
+<%= render "layouts/navbar_admin/navadmin"%>
+<div class="main">
+  <h1>Edit Banner</h1>
+  <%= form_for @banner, url: admin_banner_path, method: :patch do |f| %>
+    <%= render partial: 'form', locals: {f: f, banner: @banner} %> <br>
+    <%= f.submit "Update",class: 'btn btn-primary' %> <br><br>
+  <% end %>
+</div>

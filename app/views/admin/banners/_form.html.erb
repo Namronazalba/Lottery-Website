@@ -1,0 +1,20 @@
+<div style="">
+  <td><%= image_tag banner.preview.url,style: 'height: 150px;' if banner.preview? %></td>
+  <div>
+    <%= f.label :preview %>
+    <%= f.file_field :preview, class: 'form-control w-50' %>
+  </div>
+  <div>
+    <%= f.label :online_at %>
+    <%= f.datetime_field :online_at, class: 'form-control w-50' %>
+  </div>
+  <div>
+    <%= f.label :offline_at %>
+    <%= f.datetime_field :offline_at, class: 'form-control w-50' %>
+  </div>
+  <div>
+    <%= f.label :status %>
+    <%= f.select(:status, Item.statuses.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please Select Status' }, { class: 'form-control mt-3 w-50' }) %>
+  </div>
+
+</div>

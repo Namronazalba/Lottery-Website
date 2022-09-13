@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 2022_09_13_045047) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "banners", charset: "utf8mb4", force: :cascade do |t|
+    t.string "preview"
+    t.datetime "online_at"
+    t.datetime "offline_at"
+    t.integer "status"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "barangays", charset: "utf8mb4", force: :cascade do |t|
     t.string "code"
     t.string "name"

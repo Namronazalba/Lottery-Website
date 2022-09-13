@@ -1,0 +1,12 @@
+<div style="">
+
+  <div>
+    <%= f.label :content %>
+    <%= f.text_field :content, class: 'form-control' %>
+  </div>
+  <div>
+    <%= f.label :status %>
+    <%= f.select(:status, Item.statuses.keys.map { |key| [key.humanize, key] }, { include_blank: 'Please Select Status' }, { class: 'form-control mt-3' }) %>
+  </div>
+
+</div>

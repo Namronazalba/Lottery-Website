@@ -1,0 +1,7 @@
+<%= render "layouts/navbar_admin/navadmin"%>
+<div class="main">
+  <h1>Add new Newstiker</h1>
+  <%= form_for @newsticker, url: admin_newstickers_path, method: :post do |f| %>
+    <%= render partial: 'form', locals: {f: f, newsticker: @newsticker} %> <br>
+    <%= f.submit "Save",class: 'btn btn-primary', style:'margin-buttom: 10px;' %><br><br>
+  <% end %>

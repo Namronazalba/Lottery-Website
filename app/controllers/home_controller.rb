@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!,except: :index
 
   def index
-    @winners = Winner.published.limit(3)
+    @winners = Winner.published.limit(5)
   end
 
   def me

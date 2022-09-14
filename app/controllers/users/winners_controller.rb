@@ -25,7 +25,11 @@ class Users::WinnersController < ApplicationController
   end
 
   def set_address
-    @address = Address.where(user: current_user).find(params[:winner][:address])
+    @address = Address.where(user: current_user).find_by_id(params.dig(:winner,:address))
+    if @address.blank?
+      flash[:alert] = "You don't have any addresses"
+      redirect_to address_index_path
+    end
   end
 
 end

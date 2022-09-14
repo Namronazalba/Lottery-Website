@@ -4,7 +4,7 @@ class Users::LotteriesController < ApplicationController
 
   def index
     @categories = Category.all
-    @items = Item.active.starting
+    @items = Item.active.starting.limit(8)
     @items = @items.filter_by_category(params[:category]) if params[:category].present?
   end
 

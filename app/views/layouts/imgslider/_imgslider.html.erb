@@ -1,33 +1,110 @@
+<section class="text-light" style="height: 4vh;background-color: #000033">
+  <div class="container">
+    <div class="ticker">
+      <div class="title"></div>
+      <div class="news">
+        <marquee class="news-content">
+          <h4>hello</h4>
+        </marquee>
+      </div>
+    </div>
+  </div>
+</section>
+
 <style>
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 
+    .marquee {
+        padding-left: 100%;
+        display: inline-block;
+        animation: marquee 10s linear infinite;
+        animation-play-state: running;
+    }
+
+    .marquee.paused, .marquee-container:hover .marquee {
+        animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
 </style>
+<br><br>
+<div class="container" style="margin-top:-40px">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <% banners.count.times do |index| %>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index == 0 %>"></button>
+      <% end %>
+    </div>
+    <div class="carousel-inner" style="max-height: 50vh; background-color: black;">
+      <% banners.each_with_index do |banners, index| %>
+        <div class="carousel-item <%= 'active' if index == 0 %>">
+          <%= image_tag banners.preview.url, alt: 'avatar', class: "d-flex w-100 mx-auto" if banners.preview? %>
+        </div>
+      <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
 
-<br><br><br>
-<div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
-  <div class="carousel-inner rounded mx-auto d-block" >
-    <div class="carousel-item active">
-      <img src="photo-1602526432604-029a709e131c.jpeg" class="rounded mx-auto d-block w-50" style="height: 480px;" alt="...">
-    </div>
-    <div class="carousel-item text-center">
-      <img src="technology-aesthetic-flatlays-design.jpeg" class="rounded mx-auto d-block w-50" style="height: 480px;" alt="...">
-    </div>
-    <div class="carousel-item text-center">
-      <img src="Top_view.jpeg" class="rounded mx-auto d-block w-50" style="height: 480px;" alt="...">
+<section class=" text-light bg-dark" style="height: 4vh;">
+  <div>
+    <div class="container">
+      <div class="ticker">
+        <div class="title"></div>
+        <div class="news">
+          <div class="slider">
+            <div class="marquee-container">
+              <div class="marquee paused">
+                <% Newsticker.active.limit(6).each do |news_ticker| %>
+                  <span style="margin-right: 30px;"> <%= news_ticker.content %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <br>
-  <div class="w-100 bg-dark text-white text-center" style="height: 36px;">
-    <marquee class="news-content p-1 w-50 ">
-      <p>Announcement: Raffle with coins! GACHA! Get you want!</p>
-    </marquee>
-  </div>
+</section>
+<br>
 
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div><br>
+<script>
+    console.log($( ".marquee" ).children().length)
+    let key = 0;
+    const marquee = $('.marquee');
+
+    $('.marquee span').hide()
+
+    $( ".marquee" ).children().eq(key).show()
+
+
+    marquee.on('animationstart', () => {
+        key = 0;
+    });
+
+    marquee.on('animationiteration', () => {
+        key++;
+        if(($( ".marquee" ).children().length ) - 1 == key) key = 0;
+        $('.marquee span').hide()
+        $( ".marquee" ).children().eq(key).show();
+    });
+    marquee.removeClass('paused');
+</script>

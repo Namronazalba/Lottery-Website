@@ -76,6 +76,12 @@
           .sidenav {padding-top: 15px;}
           .sidenav a {font-size: 18px;}
       }
+      .image{
+          width: 25px;
+          height: 25px;
+          background-color: #F7F7F7;
+          border-radius: 15px;
+      }
   </style>
 </head>
 <body>
@@ -85,8 +91,14 @@
     <i class="fas fa-bars"></i></button>
   <!-- Navbar Search-->
   <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-    <div class="input-group">
-      <button class="form-control">Change Language</button>
+    <div class="dropdown">
+
+        <img src="ic_language_48px-512.webp " class=" image" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" >
+
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <%= link_to "Tagalog", { :locale => 'tl' },class:"dropdown-item"  %>
+        <%= link_to "English", { :locale => 'en' },class:"dropdown-item" %>
+      </ul>
     </div>
   </form>
   <!-- Navbar-->
@@ -104,24 +116,23 @@
   </ul>
 </nav>
 
-
 <div class="sidenav">
   <div class="sidenav-top"><p>System Management</p></div>
-  <%= link_to "Homepage", admin_root_path, class: "link-info"  %>
-  <button class="dropdown-btn">Member Management
+  <%= link_to t('homepage'), admin_root_path, class: "link-info"  %>
+  <button class="dropdown-btn"> <%= t('management') %>
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <%= link_to "- Users list", admin_userlists_path, class: "link-info"  %>
-    <%= link_to "- Items list", admin_items_path, class: "link-info"  %>
-    <%= link_to "- Categories list", admin_categories_path, class: "link-info"  %>
-    <%= link_to "- Winners list", admin_winners_path, class: "link-info"  %>
-    <%= link_to "- Bets list", admin_bets_path, class: "link-info"  %>
-    <%= link_to "- Offers list", admin_offers_path, class: "link-info"  %>
-    <%= link_to "- Orders list", admin_orders_path, class: "link-info"  %>
-    <%= link_to "- Invites list", admin_invites_path, class: "link-info"  %>
-    <%= link_to "- News tickers list", admin_newstickers_path, class: "link-info"  %>
-    <%= link_to "- Banners list", admin_banners_path, class: "link-info"  %>
+    <%= link_to t('user_list'), admin_userlists_path, class: "link-info"  %>
+    <%= link_to t('items_list'), admin_items_path, class: "link-info"  %>
+    <%= link_to t('categories_list'), admin_categories_path, class: "link-info"  %>
+    <%= link_to t('winners_list'), admin_winners_path, class: "link-info"  %>
+    <%= link_to t('bets_list'), admin_bets_path, class: "link-info"  %>
+    <%= link_to t('offers_list'), admin_offers_path, class: "link-info"  %>
+    <%= link_to t('orders_list'), admin_orders_path, class: "link-info"  %>
+    <%= link_to t('invites_list'), admin_invites_path, class: "link-info"  %>
+    <%= link_to t('news_tickers_list'), admin_newstickers_path, class: "link-info"  %>
+    <%= link_to t('banners_list'), admin_banners_path, class: "link-info"  %>
   </div>
   <button class="dropdown-btn">Example 2 Management
     <i class="fa fa-caret-down"></i>

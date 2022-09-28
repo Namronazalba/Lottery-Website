@@ -52,7 +52,4 @@ class Users::LotteriesController < ApplicationController
     params.require(:bet).permit(:coins, :item_id, :batch_count)
   end
 
-  def not_enough_ballance
-
-  end
 end

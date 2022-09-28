@@ -1,5 +1,5 @@
 <div style="">
-  <td><%= image_tag item. image.url,style: 'height: 150px;' if item.image? %></td>
+  <td><%= image_tag item.image.url,style: 'height: 150px;' if item.image? %></td>
   <div>
     <%= f.label :image %>
     <%= f.file_field :image, class: 'form-control' %>

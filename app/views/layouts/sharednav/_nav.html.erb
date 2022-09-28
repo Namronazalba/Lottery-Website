@@ -31,14 +31,59 @@
         height: 35px;
         width: 35px;
     }
+
+    .dropbtn {
+        cursor: pointer;
+    }
+
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #2980B9;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        margin-left: -100px;
+        margin-top: 15px;
+        width: 240px;
+        position: absolute;
+        background-color: #f1f1f1;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown a:hover {
+        background-color: #ddd;
+    }
+
+    .show {
+        display: block;
+    }
 </style>
 
 <nav class="navbar navbar-dark bg-primary fixed-top">
   <div class="container-fluid">
-    <div class="d-flex style1 d-flex flex-row-reverse">
-      <a class="navbar-brand cont " href="#">
-        <img src="ic_language_48px-512.webp" class="language">
-      </a>
+    <div class="d-flex style1 d-flex flex-row-reverse ">
+      <div class="dropdown">
+        <img src="ic_language_48px-512.webp" class="language dropbtn" onclick="myFunction()">
+        <div id="myDropdown" class="dropdown-content">
+            <%= link_to "Tagalog", { :locale => 'tl' } %>
+            <%= link_to "English", { :locale => 'en' } %>
+        </div>
+      </div>
+
       <% if user_signed_in? %>
         <a class="navbar-brand cont d-flex flex-row-reverse">
           <div class="coin">
@@ -100,7 +145,7 @@
     <li class="nav-item">
       <a href="" class="link-info">
         <%= link_to image_tag("/share.webp", width: 20), users_shares_path, { class: 'dock-item' } %> <br>
-        <a href="" class="link-info"><%= link_to "Share", users_shares_path, class: "link-info" %></a>
+        <a href="" class="link-info"><%= link_to t('share'), users_shares_path, class: "link-info" %></a>
       </a>
     </li>
   </ul>
@@ -109,7 +154,7 @@
     <li class="nav-item">
       <a href="" class="link-info">
         <%= link_to image_tag("/invite.png.crdownload", width: 20), invites_path, { class: 'dock-item' } %> <br>
-        <%= link_to "Invite", invites_path, class: "link-info text-decoration-none" %>
+        <%= link_to t('invite'), invites_path, class: "link-info text-decoration-none" %>
       </a>
     </li>
   </ul>
@@ -118,7 +163,7 @@
     <li class="nav-item">
       <a href="" class="link-info">
         <%= link_to image_tag("/lottery", width: 20), users_lotteries_path, { class: 'dock-item' } %> <br>
-        <%= link_to "Lottery", users_lotteries_path, class: "link-info text-decoration-none"%>
+        <%= link_to t('lottery'), users_lotteries_path, class: "link-info text-decoration-none" %>
       </a>
     </li>
   </ul>
@@ -127,7 +172,7 @@
     <li class="nav-item">
       <a href="" class="link-info">
         <%= link_to image_tag("/shop.png", width: 20), users_shops_path, { class: 'dock-item' } %> <br>
-        <%= link_to "Shop", users_shops_path, class: "link-info text-decoration-none"%>
+        <%= link_to t('shop'), users_shops_path, class: "link-info text-decoration-none" %>
       </a>
     </li>
   </ul>
@@ -135,7 +180,29 @@
   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
     <li class="nav-item">
       <%= link_to image_tag("/profile.png.crdownload", width: 20), profile_path, { class: 'dock-item' } %> <br>
-      <p><%= link_to "Me", profile_path, class: "link-info text-decoration-none"%></p>
+      <p><%= link_to t('me'), profile_path, class: "link-info text-decoration-none" %></p>
     </li>
   </ul>
 </nav>
+
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

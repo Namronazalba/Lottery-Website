@@ -1,0 +1,15 @@
+tl:
+  models:
+    post:
+      one: Post
+      other: Posts
+  activerecord:
+    attributes:
+      post:
+        email: Sulatroniko
+        disaster: Sakuna
+        title: Pamagat
+        short_url: MaiklingURL
+        content: Nilalaman
+        address: Lokasyon
+        comments: Puna

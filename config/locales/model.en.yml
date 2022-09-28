@@ -1,0 +1,13 @@
+en:
+  models:
+    user:
+      one: User
+      other: Users
+  activerecord:
+    attributes:
+      user:
+        share: Share
+        invite: Invite
+        lottery: Lottery
+        shop: Shop
+        me: Me
